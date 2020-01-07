@@ -1,0 +1,27 @@
+.App-logo-test {
+  height: 10vh;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo-test {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 990px) {
+  .navbar-nav {
+    flex-direction: row;
+    .nav-item {
+      width: 50%;
+      display: flex;
+      justify-content: center;
+    }
+  }
+}

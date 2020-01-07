@@ -1,0 +1,14 @@
+.top-menu-lg {
+  display: block;
+}
+.top-menu-md {
+  display: none;
+}
+@media (max-width: 990px) {
+  .top-menu-lg {
+    display: none;
+  }
+  .top-menu-md {
+    display: block;
+  }
+}
