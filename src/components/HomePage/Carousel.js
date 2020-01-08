@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import constants from '../../constants'
+
 const Carousel = () => {
   return (
     <div
@@ -11,21 +13,21 @@ const Carousel = () => {
       <div className='carousel-inner'>
         <div className='carousel-item active'>
           <img
-            src='/assets/slide_main_plan_increase19.png'
+            src={constants.carousel[0]}
             className='d-block w-100'
             alt='...'
           />
         </div>
         <div className='carousel-item'>
           <img
-            src='/assets/slide_main_191219epicseven.png'
+            src={constants.carousel[1]}
             className='d-block w-100'
             alt='...'
           />
         </div>
         <div className='carousel-item'>
           <img
-            src='/assets/slide_main_191126_rogphone2.png'
+            src={constants.carousel[2]}
             className='d-block w-100'
             alt='...'
           />

@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSignal, faUser } from '@fortawesome/free-solid-svg-icons'
+import HookContext from '../hooks/HookContext'
 import logo from '../assets/icon_logo.png'
 import logoTest from '../assets/hdr_btn_order2.png'
 import '../scss/Navbar.scss'
@@ -11,8 +12,8 @@ import TopMenu from './TopMenu'
 
 import constants from '../constants'
 
-const Navbar = props => {
-  const [isActive, setActive] = useState(constants.navBar[0])
+const Navbar = () => {
+  const { isActive, setActive } = useContext(HookContext)
 
   return (
     <nav className='navbar navbar-expand-lg navbar-light'>
@@ -40,6 +41,11 @@ const Navbar = props => {
                   : ''
               }`}
             >
+              {/* <Link
+                to='/'
+                className='nav-link'
+                onClick={() => setActive(constants.navBar[0])}
+              > */}
               <Link
                 to='/'
                 className='nav-link'
@@ -56,6 +62,11 @@ const Navbar = props => {
                   : ''
               }`}
             >
+              {/* <Link
+                to='#'
+                className='nav-link'
+                onClick={() => setActive(constants.navBar[1])}
+              > */}
               <Link
                 to='#'
                 className='nav-link'
