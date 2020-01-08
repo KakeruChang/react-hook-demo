@@ -1,26 +1,29 @@
 {
   "files": {
-    "main.css": "/react-hook-demo/static/css/main.dd5e94d8.chunk.css",
-    "main.js": "/react-hook-demo/static/js/main.6e551dcc.chunk.js",
-    "main.js.map": "/react-hook-demo/static/js/main.6e551dcc.chunk.js.map",
+    "main.css": "/react-hook-demo/static/css/main.a4a6c72c.chunk.css",
+    "main.js": "/react-hook-demo/static/js/main.d9788e35.chunk.js",
+    "main.js.map": "/react-hook-demo/static/js/main.d9788e35.chunk.js.map",
     "runtime-main.js": "/react-hook-demo/static/js/runtime-main.cd38bbbc.js",
     "runtime-main.js.map": "/react-hook-demo/static/js/runtime-main.cd38bbbc.js.map",
     "static/css/2.86b33428.chunk.css": "/react-hook-demo/static/css/2.86b33428.chunk.css",
-    "static/js/2.5af6790e.chunk.js": "/react-hook-demo/static/js/2.5af6790e.chunk.js",
-    "static/js/2.5af6790e.chunk.js.map": "/react-hook-demo/static/js/2.5af6790e.chunk.js.map",
+    "static/js/2.40e9e8c7.chunk.js": "/react-hook-demo/static/js/2.40e9e8c7.chunk.js",
+    "static/js/2.40e9e8c7.chunk.js.map": "/react-hook-demo/static/js/2.40e9e8c7.chunk.js.map",
     "index.html": "/react-hook-demo/index.html",
-    "precache-manifest.3bb658c0a940039c4aebaef1f53af825.js": "/react-hook-demo/precache-manifest.3bb658c0a940039c4aebaef1f53af825.js",
+    "precache-manifest.5adcdfb28aa498460ac149958b9ece65.js": "/react-hook-demo/precache-manifest.5adcdfb28aa498460ac149958b9ece65.js",
     "service-worker.js": "/react-hook-demo/service-worker.js",
     "static/css/2.86b33428.chunk.css.map": "/react-hook-demo/static/css/2.86b33428.chunk.css.map",
-    "static/css/main.dd5e94d8.chunk.css.map": "/react-hook-demo/static/css/main.dd5e94d8.chunk.css.map",
-    "static/js/2.5af6790e.chunk.js.LICENSE": "/react-hook-demo/static/js/2.5af6790e.chunk.js.LICENSE",
-    "static/media/hdr_btn_order2.png": "/react-hook-demo/static/media/hdr_btn_order2.9a44ec4f.png"
+    "static/css/main.a4a6c72c.chunk.css.map": "/react-hook-demo/static/css/main.a4a6c72c.chunk.css.map",
+    "static/js/2.40e9e8c7.chunk.js.LICENSE": "/react-hook-demo/static/js/2.40e9e8c7.chunk.js.LICENSE",
+    "static/media/hdr_btn_order2.png": "/react-hook-demo/static/media/hdr_btn_order2.9a44ec4f.png",
+    "static/media/slide_main_191126_rogphone2.png": "/react-hook-demo/static/media/slide_main_191126_rogphone2.8dd473e5.png",
+    "static/media/slide_main_191219epicseven.png": "/react-hook-demo/static/media/slide_main_191219epicseven.12856efd.png",
+    "static/media/slide_main_plan_increase19.png": "/react-hook-demo/static/media/slide_main_plan_increase19.bce9a078.png"
   },
   "entrypoints": [
     "static/js/runtime-main.cd38bbbc.js",
     "static/css/2.86b33428.chunk.css",
-    "static/js/2.5af6790e.chunk.js",
-    "static/css/main.dd5e94d8.chunk.css",
-    "static/js/main.6e551dcc.chunk.js"
+    "static/js/2.40e9e8c7.chunk.js",
+    "static/css/main.a4a6c72c.chunk.css",
+    "static/js/main.d9788e35.chunk.js"
   ]
 }
