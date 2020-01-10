@@ -24,7 +24,7 @@ function App() {
         <div className='top-menu-lg'>
           <TopMenu />
         </div>
-        <div className='container'>{renderRoutes(routes)}</div>
+        {renderRoutes(routes)}
       </div>
     </HookContext.Provider>
     // <div className="App">

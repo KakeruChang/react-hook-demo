@@ -10,7 +10,7 @@ import '../scss/common.scss'
 
 import TopMenu from './TopMenu'
 
-import constants from '../constants'
+import constants from '../constants/constants'
 
 const Navbar = () => {
   const { isActive, setActive } = useContext(HookContext)

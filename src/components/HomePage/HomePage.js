@@ -1,13 +1,14 @@
-import React, { useContext } from 'react'
-import test from '../../hooks/HookContext'
+import React from 'react'
 import Carousel from './Carousel'
+import MainButton from './MainButton'
+import MainMenu from './MainMenu'
 
 const HomePage = () => {
-  const { isActive } = useContext(test)
   return (
     <div>
       <Carousel />
-      {isActive}
+      <MainButton />
+      <MainMenu />
     </div>
   )
 }

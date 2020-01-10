@@ -1,13 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import constants from '../../constants'
+import constants from '../../constants/constants'
 
 const Carousel = () => {
   return (
     <div
       id='carouselExampleControls'
-      className='carousel slide'
+      className='carousel slide container'
       data-ride='carousel'
     >
       <div className='carousel-inner'>
