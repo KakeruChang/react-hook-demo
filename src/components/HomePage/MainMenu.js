@@ -50,7 +50,7 @@ const MainMenu = () => {
 
   const menu = dataMainMenu.map((item, index) => {
     return (
-      <div className='col-md-3 col-6 mb-4' key={index}>
+      <div className='col-lg-3 col-md-6 col-12 mb-4' key={index}>
         <Link to='/' className='text-decoration-none'>
           <div className='card h-100'>
             <div className='card-body row justify-content-center pb-0 mx-0 bg-light'>
