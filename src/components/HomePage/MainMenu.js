@@ -5,8 +5,7 @@ import '../../scss/homePage.scss'
 import data from '../../constants/data'
 
 const MainMenu = () => {
-  const test = Object.assign([], data.homePage.mainMenu)
-  const [dataMainMenu, setDataMainMenu] = useState(test)
+  const [dataMainMenu, setDataMainMenu] = useState(data.homePage.mainMenu)
 
   const hoverMenu = index => {
     let origin = JSON.parse(JSON.stringify(data.homePage.mainMenu))
