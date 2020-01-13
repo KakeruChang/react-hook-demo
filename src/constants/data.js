@@ -70,7 +70,27 @@ const data = {
         footerText: 'キャンペーン情報',
         isHover: false
       }
-    ]
+    ],
+    simulation: {
+      title: [
+        '利用する機能を選択！',
+        'データ通信容量でプランを選択！',
+        'オプションを選択！'
+      ],
+      simType: [
+        { text: '音声通話+SMS+データ通信', value: 720 },
+        { text: 'SMS+データ通信', value: 120 },
+        { text: 'データ通信のみ', value: 1 }
+      ],
+      plan: [],
+      option: [
+        { text: ['留守番', '電話機能'], value: 300 },
+        { text: ['割り込み通話', '機能'], value: 200 },
+        { text: ['10分かけ放題', 'オプション'], value: 850 },
+        { text: ['カウントフリー', 'オプション'], value: 500 },
+        { text: ['クラウドバックアップ', 'by AOS Cloud'], value: 500 }
+      ]
+    }
   }
 }
 

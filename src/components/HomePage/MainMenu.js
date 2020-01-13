@@ -8,6 +8,9 @@ const MainMenu = () => {
   const [dataMainMenu, setDataMainMenu] = useState(data.homePage.mainMenu)
 
   const hoverMenu = index => {
+    if (window.innerWidth <= 990) {
+      return
+    }
     let origin = JSON.parse(JSON.stringify(data.homePage.mainMenu))
 
     if (index || index === 0) {
@@ -41,7 +44,7 @@ const MainMenu = () => {
         )
       }
       return (
-        <p className='card-text text-dark' key={index}>
+        <p className='card-text text-dark font-weight-bold' key={index}>
           {text.text}
         </p>
       )
@@ -53,7 +56,7 @@ const MainMenu = () => {
       <div className='col-lg-3 col-md-6 col-12 mb-4' key={index}>
         <Link to='/' className='text-decoration-none'>
           <div className='card h-100'>
-            <div className='card-body row justify-content-center pb-0 mx-0 bg-light'>
+            <div className='card-body main-menu-body row justify-content-center pb-0 mx-0 bg-light'>
               <div
                 className='row justify-content-center p-0 m-0'
                 onMouseEnter={() => {
