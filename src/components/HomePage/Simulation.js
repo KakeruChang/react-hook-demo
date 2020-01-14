@@ -9,6 +9,7 @@ import data from '../../constants/data'
 
 const Simulation = () => {
   const [part1Active, setPart1Active] = useState({ text: '', value: 0 })
+  const [part2Active, setPart2Active] = useState({ value: 0 })
   const [part3Active, setPart3Active] = useState([
     { text: [], value: 0 },
     { text: [], value: 0 },
@@ -65,6 +66,12 @@ const Simulation = () => {
     ])
     setPart1Active({ text: sim.text, value: sim.value })
     setPart3Active(part3Result)
+  }
+
+  const choosePlan = event => {
+    const planPrice = parseInt(event.target.value, 10)
+    setPart2Active({ value: planPrice })
+    countPrice([{ index: 1, value: planPrice }])
   }
 
   const chooseOption = (option, index) => {
@@ -146,7 +153,7 @@ const Simulation = () => {
     // }
 
     let result = 0
-    let countArray = [part1Active.value, 0, part3Active]
+    let countArray = [part1Active.value, part2Active.value, part3Active]
     // countArray[index] = value
     renewArray.forEach(renew => {
       countArray[renew.index] = renew.value
@@ -194,6 +201,32 @@ const Simulation = () => {
         </div>
       )
     })
+  }
+
+  const selectList = list => {
+    return (
+      <select
+        className='form-control'
+        defaultValue='default'
+        onChange={choosePlan}
+      >
+        {list.map((item, index) => {
+          if (item.value) {
+            return (
+              <option value={item.value} key={index}>
+                {item.text}
+              </option>
+            )
+          } else {
+            return (
+              <option value='default' disabled key={index}>
+                {item.text}
+              </option>
+            )
+          }
+        })}
+      </select>
+    )
   }
 
   const simu3Button = (list, funcChoose, part, name, type) => {
@@ -258,8 +291,9 @@ const Simulation = () => {
             　
           </div>
         </div>
-        <div className='simu-second-part'>
+        <div className='simu-second-part  p-5'>
           <p>{data.homePage.simulation.title[1]}</p>
+          {selectList(data.homePage.simulation.plan)}
         </div>
         <div className='simu-third-part p-5'>
           <p>{data.homePage.simulation.title[2]}</p>

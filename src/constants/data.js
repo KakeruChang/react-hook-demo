@@ -82,7 +82,11 @@ const data = {
         { text: 'SMS+データ通信', value: 120 },
         { text: 'データ通信のみ', value: 1 }
       ],
-      plan: [],
+      plan: [
+        { text: 'データ通信容量を選択してください', value: 0 },
+        { text: '100MB（970円/月額)', value: 970 },
+        { text: '200MB（1,020円/月額)', value: 1020 }
+      ],
       option: [
         { text: ['留守番', '電話機能'], value: 300 },
         { text: ['割り込み通話', '機能'], value: 200 },
