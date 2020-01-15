@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 //import ChooseSimButton from './Simulation/ChooseSimButton'
 
 import '../../scss/homePage.scss'
 
 import kira from '../../assets/homePage/simulation/icon_kira.png'
 import calculator from '../../assets/homePage/simulation/icon_calculator.png'
+import hen from '../../assets/homePage/simulation/form-result-img02.png'
+import cock from '../../assets/homePage/simulation/form-result-img01.png'
 import data from '../../constants/data'
 
 const Simulation = () => {
@@ -171,7 +174,7 @@ const Simulation = () => {
     setPrice(result)
   }
 
-  const simuButton = (list, funcChoose, part, name, type) => {
+  const simu1Button = (list, funcChoose, part, name, type) => {
     return list.map((choice, index) => {
       return (
         <div className='col-lg-4 col-12 row justify-content-center' key={index}>
@@ -186,17 +189,15 @@ const Simulation = () => {
             }}
           >
             <input
-              className='mb-2 mr-2'
+              className='mb-2 mr-5'
               type={type}
               name={name}
-              id={`inlineRadio1${index}`}
+              id={`simu1${index}`}
               value={choice.text}
               onChange={event => {}}
               checked={choice.text === arrayToString(part.text)}
             />
-            <label htmlFor='inlineRadio1'>
-              {choice.text}（{choice.value}）
-            </label>
+            <label htmlFor={`simu1${index}`}>{choice.text}</label>
           </button>
         </div>
       )
@@ -247,7 +248,7 @@ const Simulation = () => {
               className='mb-2 mr-2'
               type={type}
               name={name}
-              id={`inlineRadio1${index}`}
+              id={`simu3${index}`}
               value={choice.text}
               onChange={event => {}}
               checked={
@@ -255,8 +256,10 @@ const Simulation = () => {
               }
             />
 
-            <label htmlFor='inlineRadio1'>
-              {choice.text}（{choice.value}）
+            <label htmlFor={`simu3${index}`}>
+              {choice.text.map((item, index) => {
+                return <div key={index}>{item}</div>
+              })}
             </label>
           </button>
         </div>
@@ -279,9 +282,18 @@ const Simulation = () => {
           </div>
         </div>
         <div className='simu-first-part p-5'>
-          <p>{data.homePage.simulation.title[0]}</p>
-          <div className='row justify-content-between'>
-            {simuButton(
+          <div>
+            <img
+              className='pr-2'
+              src={data.homePage.simulation.titleImg[0]}
+              alt=''
+            />
+            <span className='simu-title-text'>
+              {data.homePage.simulation.title[0]}
+            </span>
+          </div>
+          <div className='row justify-content-between m-0'>
+            {simu1Button(
               data.homePage.simulation.simType,
               chooseSim,
               part1Active,
@@ -292,12 +304,30 @@ const Simulation = () => {
           </div>
         </div>
         <div className='simu-second-part  p-5'>
-          <p>{data.homePage.simulation.title[1]}</p>
+          <div className='mb-4'>
+            <img
+              className='pr-2'
+              src={data.homePage.simulation.titleImg[1]}
+              alt=''
+            />
+            <span className='simu-title-text'>
+              {data.homePage.simulation.title[1]}
+            </span>
+          </div>
           {selectList(data.homePage.simulation.plan)}
         </div>
-        <div className='simu-third-part p-5'>
-          <p>{data.homePage.simulation.title[2]}</p>
-          <div className='row justify-content-between'>
+        <div className='simu-third-part px-5 pt-5 pb-1'>
+          <div>
+            <img
+              className='pr-2'
+              src={data.homePage.simulation.titleImg[2]}
+              alt=''
+            />
+            <span className='simu-title-text'>
+              {data.homePage.simulation.title[2]}
+            </span>
+          </div>
+          <div className='row justify-content-between m-0'>
             {simu3Button(
               data.homePage.simulation.option,
               chooseOption,
@@ -306,8 +336,29 @@ const Simulation = () => {
               'checkbox'
             )}
           </div>
+          <div className='h3 text-center text-primary'>
+            シミュレーション結果はこちら
+          </div>
         </div>
-        <div className='h1 text-danger'>{price}元</div>
+        <div className='simulation-result'>
+          <div className='inner d-flex justify-content-center py-4'>
+            <div className='text-center'>
+              <div className=''>
+                <span className='h3 text-danger'>月々</span>
+                <span className='h1 text-danger'>{price}</span>
+                <span className='h3 text-dark'>元</span>
+              </div>
+              <div>※価格表示はすべて「税抜き」です。</div>
+              <div>
+                <Link to='#' className='text-decoration-none text-primary'>
+                  詳しい料金はこちら
+                </Link>
+              </div>
+            </div>
+            <img src={cock} className='img-fluid img-cock' alt='' />
+            <img src={hen} className='img-fluid img-hen' alt='' />
+          </div>
+        </div>
       </div>
     </div>
   )

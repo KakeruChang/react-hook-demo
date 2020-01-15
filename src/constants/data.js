@@ -2,6 +2,9 @@ import homePageMainMenuImg1 from '../assets/homePage/read_img01.png'
 import homePageMainMenuImg2 from '../assets/homePage/read_img02.png'
 import homePageMainMenuImg3 from '../assets/homePage/read_img03.png'
 import homePageMainMenuImg4 from '../assets/homePage/read_img04.png'
+import simuTitleImg1 from '../assets/homePage/simulation/price-icon01.png'
+import simuTitleImg2 from '../assets/homePage/simulation/price-icon02.png'
+import simuTitleImg3 from '../assets/homePage/simulation/price-icon03.png'
 
 const data = {
   homePage: {
@@ -77,6 +80,7 @@ const data = {
         'データ通信容量でプランを選択！',
         'オプションを選択！'
       ],
+      titleImg: [simuTitleImg1, simuTitleImg2, simuTitleImg3],
       simType: [
         { text: '音声通話+SMS+データ通信', value: 720 },
         { text: 'SMS+データ通信', value: 120 },

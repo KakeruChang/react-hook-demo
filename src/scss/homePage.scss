@@ -23,6 +23,22 @@
 .simu-third-part {
   background-color: rgba(255, 255, 255, 0.7);
 }
+.inner {
+  position: relative;
+}
+.inner::after {
+  content: '';
+  position: absolute;
+  margin-left: -25px;
+  left: 50%;
+  top: 0px;
+  width: 0;
+  height: 0;
+  border-top: 20px solid #007bff;
+  border-right: 25px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 25px solid transparent;
+}
 
 .simu-area {
   cursor: pointer;
@@ -45,7 +61,44 @@
   margin-bottom: 0;
   padding: 10px;
   color: #222;
+  position: relative;
+}
+@media (min-width: 576px) {
+  .simu-area > input {
+    position: absolute;
+    left: 5%;
+    top: 30%;
+  }
 }
 .simu-area-checked {
   background: url('../assets/homePage/simulation/bg_btn_blue.png');
+}
+.simu-title-text {
+  line-height: 200%;
+  font-weight: bold;
+  font-size: large;
+}
+.img-cock {
+  left: 10%;
+  position: absolute;
+  bottom: 0;
+}
+.img-hen {
+  right: 10%;
+  position: absolute;
+  bottom: 0;
+}
+@media (max-width: 990px) {
+  .img-cock {
+    display: none;
+  }
+  .img-hen {
+    display: none;
+  }
+}
+.simulation-result {
+  position: relative;
+  border-top: 10px solid #007bff;
+  border-radius: 0 0 10px 10px;
+  background: #fff;
 }
