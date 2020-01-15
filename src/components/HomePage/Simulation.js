@@ -78,6 +78,7 @@ const Simulation = () => {
   }
 
   const chooseOption = (option, index) => {
+    console.log('chooseOption')
     const result = JSON.parse(JSON.stringify(part3Active))
 
     // check if this option is chosen
@@ -178,27 +179,30 @@ const Simulation = () => {
     return list.map((choice, index) => {
       return (
         <div className='col-lg-4 col-12 row justify-content-center' key={index}>
-          <button
-            className={`col-12  m-4 simu-area ${
-              choice.text === arrayToString(part.text)
-                ? 'simu-area-checked'
-                : ''
-            }`}
-            onClick={() => {
-              funcChoose(choice)
-            }}
-          >
-            <input
-              className='mb-2 mr-5'
-              type={type}
-              name={name}
-              id={`simu1${index}`}
-              value={choice.text}
-              onChange={event => {}}
-              checked={choice.text === arrayToString(part.text)}
-            />
-            <label htmlFor={`simu1${index}`}>{choice.text}</label>
-          </button>
+          <div className='col-12  m-4'>
+            <button
+              className={`simu-area ${
+                choice.text === arrayToString(part.text)
+                  ? 'simu-area-checked'
+                  : ''
+              }`}
+              onClick={event => {
+                event.preventDefault()
+                funcChoose(choice)
+              }}
+            >
+              <input
+                className='mb-2 mr-5'
+                type={type}
+                name={name}
+                id={`simu1${index}`}
+                value={choice.text}
+                onChange={event => {}}
+                checked={choice.text === arrayToString(part.text)}
+              />
+              <label htmlFor={`simu1${index}`}>{choice.text}</label>
+            </button>
+          </div>
         </div>
       )
     })
@@ -234,34 +238,37 @@ const Simulation = () => {
     return list.map((choice, index) => {
       return (
         <div className='col-lg-4 col-12 row justify-content-center' key={index}>
-          <button
-            className={`col-12  m-4 simu-area ${
-              arrayToString(choice.text) === arrayToString(part[index].text)
-                ? 'simu-area-checked'
-                : ''
-            }`}
-            onClick={() => {
-              funcChoose(choice, index)
-            }}
-          >
-            <input
-              className='mb-2 mr-2'
-              type={type}
-              name={name}
-              id={`simu3${index}`}
-              value={choice.text}
-              onChange={event => {}}
-              checked={
+          <div className='col-12  m-4'>
+            <button
+              className={`simu-area px-5 ${
                 arrayToString(choice.text) === arrayToString(part[index].text)
-              }
-            />
+                  ? 'simu-area-checked'
+                  : ''
+              }`}
+              onClick={event => {
+                event.preventDefault()
+                funcChoose(choice, index)
+              }}
+            >
+              <input
+                className='mb-2 mr-2'
+                type={type}
+                name={name}
+                id={`simu3${index}`}
+                value={choice.text}
+                onChange={event => {}}
+                checked={
+                  arrayToString(choice.text) === arrayToString(part[index].text)
+                }
+              />
 
-            <label htmlFor={`simu3${index}`}>
-              {choice.text.map((item, index) => {
-                return <div key={index}>{item}</div>
-              })}
-            </label>
-          </button>
+              <label htmlFor={`simu3${index}`}>
+                {choice.text.map((item, index) => {
+                  return <div key={index}>{item}</div>
+                })}
+              </label>
+            </button>
+          </div>
         </div>
       )
     })
@@ -292,7 +299,7 @@ const Simulation = () => {
               {data.homePage.simulation.title[0]}
             </span>
           </div>
-          <div className='row justify-content-between m-0'>
+          <div className='row justify-content-start'>
             {simu1Button(
               data.homePage.simulation.simType,
               chooseSim,
@@ -314,7 +321,9 @@ const Simulation = () => {
               {data.homePage.simulation.title[1]}
             </span>
           </div>
-          {selectList(data.homePage.simulation.plan)}
+          <div className='mb-4'>
+            {selectList(data.homePage.simulation.plan)}
+          </div>
         </div>
         <div className='simu-third-part px-5 pt-5 pb-1'>
           <div>
@@ -327,7 +336,7 @@ const Simulation = () => {
               {data.homePage.simulation.title[2]}
             </span>
           </div>
-          <div className='row justify-content-between m-0'>
+          <div className='row justify-content-start'>
             {simu3Button(
               data.homePage.simulation.option,
               chooseOption,
