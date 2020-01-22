@@ -6,12 +6,12 @@ import Simulation from './Simulation'
 
 const HomePage = () => {
   return (
-    <div>
+    <>
       <Carousel />
       <MainButton />
       <MainMenu />
       <Simulation />
-    </div>
+    </>
   )
 }
 

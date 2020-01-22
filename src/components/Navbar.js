@@ -1,19 +1,51 @@
-import React, { useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSignal, faUser } from '@fortawesome/free-solid-svg-icons'
+import { fireauth } from '../constants/firebase'
+import classNames from 'classnames'
+
 import HookContext from '../hooks/HookContext'
 import logo from '../assets/icon_logo.png'
 import logoTest from '../assets/hdr_btn_order2.png'
 import '../scss/Navbar.scss'
 import '../scss/common.scss'
-
 import TopMenu from './TopMenu'
-
 import constants from '../constants/constants'
 
-const Navbar = () => {
-  const { isActive, setActive } = useContext(HookContext)
+const Navbar = props => {
+  console.log(props.path)
+  // const { isActive, setActive } = useContext(HookContext)[0]
+  const [isActive, setActive] = useState(constants.navBar[0])
+  const isLoggined = useContext(HookContext).user
+
+  const logout = () => {
+    fireauth
+      .signOut()
+      .then(() => console.log('log out success'))
+      .catch(error => console.log(error))
+  }
+  const activateNav = () => {
+    switch (props.path) {
+      case '/':
+        setActive(constants.navBar[0])
+        break
+      case '/mypage':
+        setActive(constants.navBar[1])
+        break
+      default:
+        setActive('')
+        break
+    }
+  }
+
+  useEffect(() => {
+    activateNav()
+    //   return () => {
+    //     cleanup
+    //   }
+    // eslint-disable-next-line
+  }, [props.path])
 
   return (
     <nav className='navbar navbar-expand-lg navbar-light'>
@@ -34,12 +66,17 @@ const Navbar = () => {
         </button>
         <div className='collapse navbar-collapse' id='navbarSupportedContent'>
           <ul className='navbar-nav mr-auto'>
-            <li
+            {/* <li
               className={`nav-item ${
                 isActive === constants.navBar[0]
                   ? 'border-primary border-bottom'
                   : ''
               }`}
+            > */}
+            <li
+              className={classNames('nav-item', {
+                'border-primary border-bottom': isActive === constants.navBar[0]
+              })}
             >
               {/* <Link
                 to='/'
@@ -56,11 +93,9 @@ const Navbar = () => {
               </Link>
             </li>
             <li
-              className={`nav-item ${
-                isActive === constants.navBar[1]
-                  ? 'border-primary border-bottom'
-                  : ''
-              }`}
+              className={classNames('nav-item', {
+                'border-primary border-bottom': isActive === constants.navBar[1]
+              })}
             >
               {/* <Link
                 to='#'
@@ -68,12 +103,16 @@ const Navbar = () => {
                 onClick={() => setActive(constants.navBar[1])}
               > */}
               <Link
-                to='#'
+                to='/mypage'
                 className='nav-link'
-                onClick={() => setActive(constants.navBar[1])}
+                onClick={() => {
+                  setActive(constants.navBar[1])
+                }}
               >
                 <FontAwesomeIcon icon={faUser} size='1x' />
-                <span className='px-2'>マイページ</span>
+                <span className='px-2'>
+                  マイページ{!isLoggined ? 'not loggin' : isLoggined.email}
+                </span>
               </Link>
             </li>
             {/* <li className="nav-item dropdown">
@@ -119,7 +158,7 @@ const Navbar = () => {
           <div className='top-menu-md'>
             <TopMenu />
           </div>
-          <Link to='#'>
+          <Link to='/' onClick={logout}>
             <img src={logoTest} className='App-logo-test' alt='logo' />
           </Link>
         </div>

@@ -1,0 +1,23 @@
+// .login-title {
+//   background: url('../assets/bg_login_title.png');
+//   font-weight: bold;
+//   border-bottom: 1px solid;
+//   border-left: 10px solid;
+// }
+.login-form-wrap {
+  margin-left: 1.5rem;
+  margin-bottom: 3rem;
+}
+@media (max-width: 768px) {
+  .login-form-wrap {
+    margin-left: 1.5rem;
+    margin-right: 0.5rem;
+  }
+}
+.login-note {
+  font-size: 10px;
+  ::before {
+    content: '※';
+    padding-right: 0;
+  }
+}
