@@ -2,8 +2,11 @@ import React from 'react'
 // import { Link } from 'react-router-dom'
 import '../../scss/mypage.scss'
 import MemberData from './MemberData'
+import MemberPhone from './MemberPhone'
+import data from '../../constants/data'
 
 const MemberFunc = () => {
+  const user = data.user
   return (
     <>
       <nav>
@@ -58,14 +61,14 @@ const MemberFunc = () => {
           </a>
         </div>
       </nav>
-      <div className='tab-content' id='nav-tabContent'>
+      <div className='tab-content mb-3' id='nav-tabContent'>
         <div
           className='tab-pane fade border rounded show active'
           id='nav-data'
           role='tabpanel'
           aria-labelledby='nav-data-tab'
         >
-          <MemberData />
+          <MemberData data={user.data} />
         </div>
         <div
           className='tab-pane fade border rounded'
@@ -73,7 +76,7 @@ const MemberFunc = () => {
           role='tabpanel'
           aria-labelledby='nav-phone-tab'
         >
-          phone
+          <MemberPhone phone={user.phone} />
         </div>
         <div
           className='tab-pane fade border rounded'

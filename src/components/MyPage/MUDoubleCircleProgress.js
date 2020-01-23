@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import CircularProgress from '@material-ui/core/CircularProgress'
 // import { CircularProgress } from '@material-ui/core'
-import { green, grey } from '@material-ui/core/colors'
+import { grey } from '@material-ui/core/colors'
 // import Button from "@material-ui/core/Button";
 // import Fab from "@material-ui/core/Fab";
 // import CheckIcon from "@material-ui/icons/Check";
@@ -28,35 +28,39 @@ const MUDoubleCircleProgress = props => {
       margin: theme.spacing(1),
       position: 'relative'
     },
-    buttonSuccess: {
-      backgroundColor: green[500],
-      '&:hover': {
-        backgroundColor: green[700]
-      }
+    // buttonSuccess: {
+    //   backgroundColor: green[500],
+    //   '&:hover': {
+    //     backgroundColor: green[700]
+    //   }
+    // },
+    // fabProgress: {
+    //   color: green[500],
+    //   position: 'absolute',
+    //   top: -6,
+    //   left: -6,
+    //   zIndex: 1
+    // },
+    thisMonth: {
+      color: '#007bff'
     },
-    fabProgress: {
-      color: green[500],
-      position: 'absolute',
-      top: -6,
-      left: -6,
-      zIndex: 1
-    },
-    buttonProgress: {
-      color: green[500],
+    before: {
+      // color: green[500],
+      color: '#ffc107',
       position: 'absolute',
       top: (circleSize[0] - circleSize[1]) / 2,
       left: (circleSize[0] - circleSize[1]) / 2
       // marginTop: -12,
       // marginLeft: -12
     },
-    buttonProgress2: {
-      color: grey[500],
-      position: 'absolute',
-      top: (circleSize[0] - circleSize[2]) / 2,
-      left: (circleSize[0] - circleSize[2]) / 2
-      // marginTop: -12,
-      // marginLeft: -12
-    },
+    // buttonProgress2: {
+    //   color: grey[500],
+    //   position: 'absolute',
+    //   top: (circleSize[0] - circleSize[2]) / 2,
+    //   left: (circleSize[0] - circleSize[2]) / 2
+    //   // marginTop: -12,
+    //   // marginLeft: -12
+    // },
     backgroundNow: {
       backgroundColor: grey[500],
       position: 'absolute',
@@ -161,13 +165,14 @@ const MUDoubleCircleProgress = props => {
           size={circleSize[0]}
           thickness={5}
           value={completedNow}
+          className={classes.thisMonth}
         />
         <CircularProgress
           variant='static'
           size={circleSize[1]}
           thickness={5}
           value={completedBefore}
-          className={classes.buttonProgress}
+          className={classes.before}
         />
         <div className={classes.backgroundNow}></div>
         <div className={classes.backgroundBefore}></div>

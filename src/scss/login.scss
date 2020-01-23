@@ -16,8 +16,8 @@
 }
 .login-note {
   font-size: 10px;
-  ::before {
+  &::before {
     content: '※';
-    padding-right: 0;
+    // padding-right: 0;
   }
 }

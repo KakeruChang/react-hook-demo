@@ -7,6 +7,28 @@ import simuTitleImg2 from '../assets/homePage/simulation/price-icon02.png'
 import simuTitleImg3 from '../assets/homePage/simulation/price-icon03.png'
 
 const data = {
+  user: {
+    data: {
+      thisMonth: { origin: 10, now: 9 },
+      before: { origin: 20, now: 8.8 }
+    },
+    phone: {
+      thisMonth: {
+        date: { year: '2020', month: '01' },
+        content: [
+          {
+            number: '070-1234-5678',
+            value: 0
+          }
+        ]
+      },
+      before: [
+        { value: 233, date: { year: '2019', month: '10' } },
+        { value: 100, date: { year: '2019', month: '11' } },
+        { value: 0, date: { year: '2019', month: '12' } }
+      ]
+    }
+  },
   homePage: {
     mainMenu: [
       {
