@@ -16,12 +16,26 @@ import TopMenu from './components/TopMenu'
 
 import { withRouter } from 'react-router-dom'
 
+// import { fireauth } from './constants/firebase'
+// const checkTest = () => {
+//   const user = fireauth.currentUser
+//   if (user) {
+//     // User is signed in.
+//     console.log('User is signed in.')
+//     console.log(user)
+//   } else {
+//     // No user is signed in.
+//     console.log('No user is signed in.')
+//   }
+// }
+
 function App(props) {
   const sharedContext = { user: useIsLoggined() }
 
   return (
     <HookContext.Provider value={sharedContext}>
       <>
+        {/* <button onClick={checkTest}>check</button> */}
         <Navbar path={props.location.pathname} />
         <div className='top-menu-lg'>
           <TopMenu />

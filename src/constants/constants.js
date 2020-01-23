@@ -4,7 +4,15 @@ import carousel3 from '../assets/slide_main_191126_rogphone2.png'
 
 const constants = {
   navBar: ['guide', 'myPage'],
-  carousel: [carousel1, carousel2, carousel3]
+  carousel: [carousel1, carousel2, carousel3],
+  myPage: {
+    memberData: {
+      circularProgressSize: {
+        lg: [400, 310, 240],
+        sm: [300, 232, 179.5]
+      }
+    }
+  }
 }
 
 export default constants

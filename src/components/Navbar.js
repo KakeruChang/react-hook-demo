@@ -41,9 +41,6 @@ const Navbar = props => {
 
   useEffect(() => {
     activateNav()
-    //   return () => {
-    //     cleanup
-    //   }
     // eslint-disable-next-line
   }, [props.path])
 
