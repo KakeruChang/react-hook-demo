@@ -66,7 +66,7 @@ const MemberPhone = props => {
             通話料金はご利用月の翌々月にご請求いたします。
           </div>
         </div>
-        <div className='col-12 row justify-content-center'>
+        <div className='col-12 row justify-content-center mt-3'>
           <div>
             <button className='simu-area'>詳しい通話明細はこちら</button>
           </div>
@@ -132,7 +132,7 @@ const MemberPhone = props => {
           通話料金はご利用月の翌々月にご請求いたします。
         </div>
       </div>
-      <div className='col-12 row justify-content-center'>
+      <div className='col-12 row justify-content-center mt-3'>
         <div>
           <button className='simu-area'>詳しい通話明細はこちら</button>
         </div>

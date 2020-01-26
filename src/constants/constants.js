@@ -9,7 +9,8 @@ const constants = {
     memberData: {
       circularProgressSize: {
         lg: [400, 310, 240],
-        sm: [300, 232, 179.5]
+        md: [300, 232, 179.5],
+        sm: [250, 194, 149.5]
       }
     }
   }

@@ -10,7 +10,8 @@ const data = {
   user: {
     data: {
       thisMonth: { origin: 10, now: 9 },
-      before: { origin: 20, now: 8.8 }
+      before: { origin: 20, now: 8.8 },
+      plan: '音声通話なし・SMSあり'
     },
     phone: {
       thisMonth: {
@@ -27,7 +28,26 @@ const data = {
         { value: 100, date: { year: '2019', month: '11' } },
         { value: 0, date: { year: '2019', month: '12' } }
       ]
-    }
+    },
+    games: [
+      {
+        gameName: 'グランブルーファンタジー',
+        gameID: '1234567',
+        state: true,
+        startDate: '2019年12月07日',
+        recentStarDate: '2020年01月10日',
+        star: 2
+      },
+      {
+        gameName: 'グランブルーファンタジー',
+        gameID: '1234567',
+        state: true,
+        startDate: '2019年12月07日',
+        recentStarDate: '2020年01月10日',
+        star: 0
+      }
+    ],
+    LP: 1234
   },
   homePage: {
     mainMenu: [

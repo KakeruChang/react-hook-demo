@@ -3,6 +3,8 @@ import React from 'react'
 import '../../scss/mypage.scss'
 import MemberData from './MemberData'
 import MemberPhone from './MemberPhone'
+import MemberGame from './MemberGame'
+import MemberLP from './MemberLP'
 import data from '../../constants/data'
 
 const MemberFunc = () => {
@@ -84,7 +86,7 @@ const MemberFunc = () => {
           role='tabpanel'
           aria-labelledby='nav-game-tab'
         >
-          game
+          <MemberGame games={user.games} data={user.data} />
         </div>
         <div
           className='tab-pane fade border rounded'
@@ -92,7 +94,7 @@ const MemberFunc = () => {
           role='tabpanel'
           aria-labelledby='nav-lp-tab'
         >
-          lp
+          <MemberLP LP={user.LP} />
         </div>
       </div>
     </>

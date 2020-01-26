@@ -108,8 +108,10 @@ const MUDoubleCircleProgress = props => {
     const width = windowSize.width
     if (width > 990 || (width <= 767 && width >= 576)) {
       setCircleSize(constants.myPage.memberData.circularProgressSize.lg)
-    } else {
+    } else if (width < 400) {
       setCircleSize(constants.myPage.memberData.circularProgressSize.sm)
+    } else {
+      setCircleSize(constants.myPage.memberData.circularProgressSize.md)
     }
   }, [windowSize.width])
 
