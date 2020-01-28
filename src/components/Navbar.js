@@ -101,14 +101,17 @@ const Navbar = props => {
               > */}
               <Link
                 to='/mypage'
-                className='nav-link'
+                className={classNames('nav-link', {
+                  'text-success': isLoggined
+                })}
                 onClick={() => {
                   setActive(constants.navBar[1])
                 }}
               >
                 <FontAwesomeIcon icon={faUser} size='1x' />
                 <span className='px-2'>
-                  マイページ{!isLoggined ? 'not loggin' : isLoggined.email}
+                  マイページ
+                  {/* （{!isLoggined ? 'not logged in' : isLoggined.email}） */}
                 </span>
               </Link>
             </li>

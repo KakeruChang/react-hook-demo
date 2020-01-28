@@ -37,14 +37,6 @@ const data = {
         startDate: '2019年12月07日',
         recentStarDate: '2020年01月10日',
         star: 2
-      },
-      {
-        gameName: 'グランブルーファンタジー',
-        gameID: '1234567',
-        state: true,
-        startDate: '2019年12月07日',
-        recentStarDate: '2020年01月10日',
-        star: 0
       }
     ],
     LP: 1234

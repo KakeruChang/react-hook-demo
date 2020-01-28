@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import classNames from 'classnames'
 //import ChooseSimButton from './Simulation/ChooseSimButton'
 
 import '../../scss/homePage.scss'
 
+import { useWindowSize } from '../../hooks/useWindowSize'
 import kira from '../../assets/homePage/simulation/icon_kira.png'
 import calculator from '../../assets/homePage/simulation/icon_calculator.png'
 import hen from '../../assets/homePage/simulation/form-result-img02.png'
@@ -21,6 +23,7 @@ const Simulation = () => {
     { text: [], value: 0 }
   ])
   const [price, setPrice] = useState(0)
+  const windowSize = useWindowSize()
 
   const chooseSim = sim => {
     const part3Result = JSON.parse(JSON.stringify(part3Active))
@@ -181,18 +184,18 @@ const Simulation = () => {
         <div className='col-lg-4 col-12 row justify-content-center' key={index}>
           <div className='col-12  m-4'>
             <button
-              className={`simu-area ${
-                choice.text === arrayToString(part.text)
-                  ? 'simu-area-checked'
-                  : ''
-              }`}
+              className={classNames('simu-area', {
+                'simu-area-checked': choice.text === arrayToString(part.text)
+              })}
               onClick={event => {
                 event.preventDefault()
                 funcChoose(choice)
               }}
             >
               <input
-                className='mb-2 mr-5'
+                className={classNames('mb-2', {
+                  'mr-5': windowSize.width > 576
+                })}
                 type={type}
                 name={name}
                 id={`simu1${index}`}
@@ -200,7 +203,14 @@ const Simulation = () => {
                 onChange={event => {}}
                 checked={choice.text === arrayToString(part.text)}
               />
-              <label htmlFor={`simu1${index}`}>{choice.text}</label>
+              <label
+                htmlFor={`simu1${index}`}
+                className={classNames({
+                  'font-14': windowSize.width > 991 && windowSize.width < 1200
+                })}
+              >
+                {choice.text}
+              </label>
             </button>
           </div>
         </div>

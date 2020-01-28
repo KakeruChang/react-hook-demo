@@ -1,14 +1,18 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import classNames from 'classnames'
 
 import '../../scss/homePage.scss'
+import '../../scss/common.scss'
 import data from '../../constants/data'
+import { useWindowSize } from '../../hooks/useWindowSize'
 
 const MainMenu = () => {
   const [dataMainMenu, setDataMainMenu] = useState(data.homePage.mainMenu)
+  const windowSize = useWindowSize()
 
   const hoverMenu = index => {
-    if (window.innerWidth <= 990) {
+    if (windowSize.width <= 990) {
       return
     }
     let origin = JSON.parse(JSON.stringify(data.homePage.mainMenu))
@@ -73,7 +77,12 @@ const MainMenu = () => {
               </div>
             </div>
             <div className='card-footer text-center bg-primary text-light main-menu-footer-arrow '>
-              <span className='text-light font-weight-bolder'>
+              {/* <span className='text-light font-weight-bolder'> */}
+              <span
+                className={classNames('text-light', 'font-weight-bolder', {
+                  'font-14': windowSize.width > 991 && windowSize.width < 1200
+                })}
+              >
                 {item.footerText}
               </span>
             </div>
