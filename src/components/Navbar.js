@@ -22,7 +22,9 @@ const Navbar = props => {
   const logout = () => {
     fireauth
       .signOut()
-      .then(() => console.log('log out success'))
+      .then(() => {
+        console.log('log out success')
+      })
       .catch(error => console.log(error))
   }
   const activateNav = () => {
@@ -63,13 +65,6 @@ const Navbar = props => {
         </button>
         <div className='collapse navbar-collapse' id='navbarSupportedContent'>
           <ul className='navbar-nav mr-auto'>
-            {/* <li
-              className={`nav-item ${
-                isActive === constants.navBar[0]
-                  ? 'border-primary border-bottom'
-                  : ''
-              }`}
-            > */}
             <li
               className={classNames('nav-item', {
                 'border-primary border-bottom': isActive === constants.navBar[0]

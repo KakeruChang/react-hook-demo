@@ -13,6 +13,7 @@ import { useIsLoggined } from './hooks/useIsLoggined'
 
 import Navbar from './components/Navbar'
 import TopMenu from './components/TopMenu'
+import OwnershipAnnouncement from './components/OwnershipAnnouncement'
 
 import { withRouter } from 'react-router-dom'
 
@@ -41,6 +42,7 @@ function App(props) {
           <TopMenu />
         </div>
         {renderRoutes(routes, { isLoggined: useIsLoggined() })}
+        <OwnershipAnnouncement />
       </>
     </HookContext.Provider>
   )
