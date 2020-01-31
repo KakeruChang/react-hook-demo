@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { fireauth } from '../constants/firebase'
 
 import '../scss/login.scss'
 import '../scss/common.scss'
 
-const Login = () => {
+const Login = props => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const { from } = props.location.state || { from: { pathname: '/mypage' } }
 
   const onChangeHandler = event => {
     switch (event.target.id) {
@@ -22,12 +23,22 @@ const Login = () => {
     }
   }
 
-  const login = () => {
+  const login = event => {
+    event.preventDefault()
     fireauth
       .signInWithEmailAndPassword(email, password)
-      .then(result => console.log(result))
+      .then(result => {
+        console.log(result)
+      })
       .catch(error => console.log(error))
   }
+
+  useEffect(() => {
+    if (props.auth) {
+      props.history.push(from.pathname)
+    }
+    // eslint-disable-next-line
+  }, [props.auth])
 
   return (
     <div className='container'>
@@ -72,15 +83,13 @@ const Login = () => {
             <div className='col-md-3 col-12 row pr-0'>
               <div className='form-group col-12 row pr-0'>
                 <div className='col-12 pr-0'>
-                  <Link to='/'>
-                    <button
-                      onClick={() => login()}
-                      type='submit'
-                      className='btn btn-primary h-100 w-100'
-                    >
-                      ログイン
-                    </button>
-                  </Link>
+                  <button
+                    onClick={event => login(event)}
+                    type='submit'
+                    className='btn btn-primary h-100 w-100'
+                  >
+                    ログイン
+                  </button>
                 </div>
               </div>
             </div>

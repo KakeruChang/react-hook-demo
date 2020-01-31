@@ -1,16 +1,11 @@
 import React from 'react'
 import { Redirect } from 'react-router'
-import HomePage from './components/HomePage/HomePage'
-import MyPage from './components/MyPage/Mypage'
-import Login from './components/Login'
+import HomePage from '../components/HomePage/HomePage'
+import MyPage from '../components/MyPage/Mypage'
+import Login from '../components/Login'
+import Order from '../components/Order/Order'
+import SelectPlan from '../components/Order/SelectPlan'
 
-const isUserLoggedIn = props => {
-  // if it is null ,it won't be redirected
-  if (props.isLoggined === false) {
-    return false
-  }
-  return true
-}
 const routes = [
   {
     path: '/',
@@ -20,11 +15,21 @@ const routes = [
   },
   {
     path: '/mypage',
-    render: props =>
-      isUserLoggedIn(props) ? <MyPage /> : <Redirect to='/login' />
-
-    // component: MyPage
+    requiresAuth: true,
+    // render: props =>
+    //   isUserLoggedIn(props) ? <MyPage /> : <Redirect to='/login' />
+    component: MyPage
     // breadcrumbName: data.jp.index.name
+  },
+  {
+    path: '/order',
+    component: Order,
+    routes: [
+      {
+        path: '/order/selectplan',
+        component: SelectPlan
+      }
+    ]
   },
   //   {
   //     path: '/mypage',

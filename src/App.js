@@ -1,15 +1,15 @@
 import React from 'react'
-import { renderRoutes } from 'react-router-config'
+// import { renderRoutes } from 'react-router-config'
+import renderRoutesWithAuth from './router/renderRoutesWithAuth'
 import 'bootstrap/scss/bootstrap.scss'
 import 'bootstrap/js/src/index'
 
 // import logo from "./logo.svg";
-import routes from './routes'
+import routes from './router/routes'
 import './scss/common.scss'
 import './App.css'
 import HookContext from './hooks/HookContext'
-import { useIsLoggined } from './hooks/useIsLoggined'
-// import navBarContext from './hooks/navBarContext'
+import { useIsLoggedIn } from './hooks/useIsLoggedIn'
 
 import Navbar from './components/Navbar'
 import TopMenu from './components/TopMenu'
@@ -17,33 +17,23 @@ import OwnershipAnnouncement from './components/OwnershipAnnouncement'
 
 import { withRouter } from 'react-router-dom'
 
-// import { fireauth } from './constants/firebase'
-// const checkTest = () => {
-//   // const user = fireauth.currentUser
-//   // if (user) {
-//   //   // User is signed in.
-//   //   console.log('User is signed in.')
-//   //   console.log(user)
-//   // } else {
-//   //   // No user is signed in.
-//   //   console.log('No user is signed in.')
-//   // }
-// }
-
 function App(props) {
-  const sharedContext = { user: useIsLoggined() }
+  const sharedContext = { user: useIsLoggedIn() }
+  const path = props.location.pathname
 
   return (
     <HookContext.Provider value={sharedContext}>
-      <>
-        {/* <button onClick={checkTest}>check</button> */}
-        <Navbar path={props.location.pathname} />
-        <div className='top-menu-lg'>
-          <TopMenu />
-        </div>
-        {renderRoutes(routes, { isLoggined: useIsLoggined() })}
-        <OwnershipAnnouncement />
-      </>
+      {path.indexOf('/order') === -1 && (
+        <>
+          <Navbar path={path} />
+          <div className='top-menu-lg'>
+            <TopMenu />
+          </div>
+        </>
+      )}
+      {/* {renderRoutes(routes, { isLoggedIn: useIsLoggedIn() })} */}
+      {renderRoutesWithAuth(routes, useIsLoggedIn())}
+      <OwnershipAnnouncement />
     </HookContext.Provider>
   )
 }
