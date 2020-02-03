@@ -4,7 +4,11 @@ import HomePage from '../components/HomePage/HomePage'
 import MyPage from '../components/MyPage/Mypage'
 import Login from '../components/Login'
 import Order from '../components/Order/Order'
+import BeforeOrder from '../components/Order/BeforeOrder'
 import SelectPlan from '../components/Order/SelectPlan'
+import InformationInput from '../components/Order/InformationInput'
+import CheckOrder from '../components/Order/CheckOrder'
+import CompleteOrder from '../components/Order/CompleteOrder'
 
 const routes = [
   {
@@ -26,8 +30,30 @@ const routes = [
     component: Order,
     routes: [
       {
+        path: '/order',
+        exact: true,
+        component: BeforeOrder
+      },
+      {
         path: '/order/selectplan',
         component: SelectPlan
+      },
+      {
+        path: '/order/informationinput',
+        component: InformationInput
+      },
+      {
+        path: '/order/checkorder',
+        component: CheckOrder
+      },
+      {
+        path: '/order/completeorder',
+        component: CompleteOrder
+      },
+      {
+        path: '*',
+        exact: true,
+        component: () => <Redirect to='/' />
       }
     ]
   },

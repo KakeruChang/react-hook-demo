@@ -5,6 +5,11 @@ import homePageMainMenuImg4 from '../assets/homePage/read_img04.png'
 import simuTitleImg1 from '../assets/homePage/simulation/price-icon01.png'
 import simuTitleImg2 from '../assets/homePage/simulation/price-icon02.png'
 import simuTitleImg3 from '../assets/homePage/simulation/price-icon03.png'
+import orderTitleImg1 from '../assets/order/order-flow-l_01.png'
+import orderTitleImg2 from '../assets/order/order-flow-l_02.png'
+import orderTitleImg3 from '../assets/order/order-flow-l_03.png'
+import orderTitleImg4 from '../assets/order/order-flow-l_04.png'
+import orderTitleImg5 from '../assets/order/order-flow-l_05.png'
 
 const data = {
   user: {
@@ -132,6 +137,63 @@ const data = {
         { text: ['カウントフリー', 'オプション'], value: 500 },
         { text: ['クラウドバックアップ', 'by AOS Cloud'], value: 500 }
       ]
+    }
+  },
+  order: {
+    title: [
+      {
+        index: 1,
+        name: 'BeforeOrder',
+        text: 'お申し込み前に',
+        img: orderTitleImg1
+      },
+      {
+        index: 2,
+        name: 'SelectPlan',
+        text: 'サービス選択',
+        img: orderTitleImg2
+      },
+      {
+        index: 3,
+        name: 'InformationInput',
+        text: 'お客さま情報入力',
+        img: orderTitleImg3
+      },
+      {
+        index: 4,
+        name: 'CheckOrder',
+        text: '申し込み内容確認',
+        img: orderTitleImg4
+      },
+      {
+        index: 5,
+        name: 'CompleteOrder',
+        text: '申し込み完了',
+        img: orderTitleImg5
+      }
+    ],
+    BeforeOrder: {
+      privacy: {
+        NO2List: [
+          '本サービスをご利用いただくお客様の登録・アカウント開設・本人確認のため',
+          '本サービスに関連した、無料会員登録のお客様の登録・アカウント開設・本人確認のため',
+          '本サービスの管理・改善・不正利用防止のため',
+          '当社指定のフィルタリングオプションをご利用いただくため',
+          '本サービス料金の請求関連業務を行うため',
+          '本サービスに関する利用状況の分析及び統計的データ作成のため',
+          '本サービスに関するカスタマーサービス提供及び新企画の立案・提供のため',
+          '本サービスに関するアンケート調査・分析及びマーケティング調査・分析のため',
+          '本サービスに関するキャンペーン等の抽選及び賞品発送のため',
+          '上記各利用目的に付随する利用のため',
+          'その他当社の利用規約等で定める目的のため'
+        ],
+        NO3List: [
+          '法令に基づく場合',
+          '人の生命、身体又は財産の保護のために必要がある場合であって、ご本人の同意を得ることが困難であるとき',
+          '公衆衛生の向上又は児童の健全な育成の推進のために特に必要がある場合であって、ご本人の同意を得ることが困難であるとき',
+          '国の機関もしくは地方公共団体又はその委託を受けた者が法令の定める事務を遂行することに対して協力する必要がある場合であって、ご本人の同意を得ることにより当該事務の遂行に支障を及ぼすおそれがあるとき'
+        ]
+      }
     }
   }
 }

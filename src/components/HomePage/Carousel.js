@@ -1,7 +1,7 @@
 import React from 'react'
 // import { Link } from 'react-router-dom'
 
-import constants from '../../constants/constants'
+import constants from '../../data/constants'
 
 const Carousel = () => {
   return (

@@ -13,6 +13,9 @@ const constants = {
         sm: [250, 194, 149.5]
       }
     }
+  },
+  order: {
+    titleBreakPoint: 992
   }
 }
 

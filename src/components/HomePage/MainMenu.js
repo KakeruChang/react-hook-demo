@@ -4,7 +4,7 @@ import classNames from 'classnames'
 
 import '../../scss/homePage.scss'
 import '../../scss/common.scss'
-import data from '../../constants/data'
+import data from '../../data/data'
 import { useWindowSize } from '../../hooks/useWindowSize'
 
 const MainMenu = () => {

@@ -10,7 +10,7 @@ import kira from '../../assets/homePage/simulation/icon_kira.png'
 import calculator from '../../assets/homePage/simulation/icon_calculator.png'
 import hen from '../../assets/homePage/simulation/form-result-img02.png'
 import cock from '../../assets/homePage/simulation/form-result-img01.png'
-import data from '../../constants/data'
+import data from '../../data/data'
 
 const Simulation = () => {
   const [part1Active, setPart1Active] = useState({ text: '', value: 0 })

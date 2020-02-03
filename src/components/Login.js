@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { fireauth } from '../constants/firebase'
+import { fireauth } from '../data/firebase'
 
 import '../scss/login.scss'
 import '../scss/common.scss'
@@ -8,6 +8,7 @@ import '../scss/common.scss'
 const Login = props => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [logInError, setLogInError] = useState('')
   const { from } = props.location.state || { from: { pathname: '/mypage' } }
 
   const onChangeHandler = event => {
@@ -30,7 +31,15 @@ const Login = props => {
       .then(result => {
         console.log(result)
       })
-      .catch(error => console.log(error))
+      .catch(error => {
+        console.log(error)
+        setLogInError('ログインIDまたはパスワードが違います')
+        setEmail('')
+        setPassword('')
+        setTimeout(() => {
+          setLogInError('')
+        }, 5000)
+      })
   }
 
   useEffect(() => {
@@ -44,6 +53,11 @@ const Login = props => {
     <div className='container'>
       <div className='border border-primary rounded'>
         <div className='lm-title border-primary m-3'>ログイン</div>
+        {logInError && (
+          <div className='alert alert-danger m-3' role='alert'>
+            {logInError}
+          </div>
+        )}
         <form>
           <div className='row login-form-wrap'>
             <div className='col-md-9 col-12 row pr-0'>
@@ -57,6 +71,7 @@ const Login = props => {
                 <div className='col-md-9 col-12 pr-0'>
                   <input
                     type='email'
+                    value={email}
                     className='form-control'
                     id='inputEmail'
                     onChange={onChangeHandler}
@@ -73,6 +88,7 @@ const Login = props => {
                 <div className='col-md-9 col-12 pr-0'>
                   <input
                     type='password'
+                    value={password}
                     className='form-control'
                     id='inputPassword'
                     onChange={onChangeHandler}

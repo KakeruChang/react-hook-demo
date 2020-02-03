@@ -10,7 +10,7 @@ import { grey } from '@material-ui/core/colors'
 // import CheckIcon from "@material-ui/icons/Check";
 // import SaveIcon from "@material-ui/icons/Save";
 
-import constants from '../../constants/constants'
+import constants from '../../data/constants'
 import { useWindowSize } from '../../hooks/useWindowSize'
 
 const MUDoubleCircleProgress = props => {

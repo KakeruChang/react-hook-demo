@@ -5,7 +5,7 @@ import MemberData from './MemberData'
 import MemberPhone from './MemberPhone'
 import MemberGame from './MemberGame'
 import MemberLP from './MemberLP'
-import data from '../../constants/data'
+import data from '../../data/data'
 
 const MemberFunc = () => {
   const user = data.user

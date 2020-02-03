@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSignal, faUser, faDoorOpen } from '@fortawesome/free-solid-svg-icons'
-import { fireauth } from '../constants/firebase'
+import { fireauth } from '../data/firebase'
 import classNames from 'classnames'
 
 import HookContext from '../hooks/HookContext'
@@ -11,7 +11,7 @@ import logoTest from '../assets/hdr_btn_order2.png'
 import '../scss/Navbar.scss'
 import '../scss/common.scss'
 import TopMenu from './TopMenu'
-import constants from '../constants/constants'
+import constants from '../data/constants'
 import { useWindowSize } from '../hooks/useWindowSize'
 
 const Navbar = props => {
