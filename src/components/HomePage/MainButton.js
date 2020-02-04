@@ -12,7 +12,7 @@ const MainButton = () => {
           LinksMateで
           <span className='text-warning'>もっとゲームを楽しもう！</span>
         </h1>
-        <Link to='/' className='main-button'>
+        <Link to='/order' className='main-button'>
           <img src={MainButtonImg} className='img-fluid' alt='MainButton' />
         </Link>
       </div>

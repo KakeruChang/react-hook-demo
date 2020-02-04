@@ -33,6 +33,14 @@
 .bg-white {
   background-color: #fff;
 }
+.bg-grey {
+  background-color: #ececec !important;
+}
 .list-style-none {
   list-style: none;
+}
+.table .thead-primary th {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #fff;
 }
