@@ -13,7 +13,7 @@ const Order = props => {
           <img src={logo} alt='logo' />
         </Link>
       </nav>
-      <div className='container'>
+      <div className='container container-order'>
         <OrderTitle path={props.location.pathname} />
         {renderRoutes(props.route.routes)}
       </div>
