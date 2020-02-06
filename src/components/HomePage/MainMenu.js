@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import classNames from 'classnames'
 
-import '../../scss/homePage.scss'
-import '../../scss/common.scss'
 import data from '../../data/data'
 import { useWindowSize } from '../../hooks/useWindowSize'
 

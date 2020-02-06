@@ -1,10 +1,8 @@
 import React from 'react'
 // import React, { useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
-import MUDoubleCircleProgress from './MUDoubleCircleProgress'
 
-import '../../scss/common.scss'
-import '../../scss/mypage.scss'
+import MUDoubleCircleProgress from './MUDoubleCircleProgress'
 
 const MemberData = props => {
   // const [wrapperSize, setWrapperSize] = useState({ height: 0, width: 0 })

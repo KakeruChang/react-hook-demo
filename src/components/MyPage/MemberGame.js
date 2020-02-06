@@ -5,8 +5,6 @@ import { faStar as faEmptyStar } from '@fortawesome/free-regular-svg-icons'
 
 import MemberGameNote from './MemberGameNote'
 import { useWindowSize } from '../../hooks/useWindowSize'
-import '../../scss/common.scss'
-import '../../scss/mypage.scss'
 
 const MemberGame = props => {
   const windowSize = useWindowSize()

@@ -14,6 +14,9 @@ import beforeOrderImgMail from '../assets/order/order_mail.png'
 import beforeOrderImgHonnnin from '../assets/order/order_honnnin.png'
 import beforeOrderImgMNP from '../assets/order/order_mnp.png'
 import beforeOrderImgCredit from '../assets/order/order_credit.png'
+import choosePlanDataOnly from '../assets/order/icon_data_only.png'
+import choosePlanOnseiUse from '../assets/order/icon_onsei_use.png'
+import choosePlanOnseiNo from '../assets/order/icon_onsei_no.png'
 
 const data = {
   user: {
@@ -125,14 +128,18 @@ const data = {
       ],
       titleImg: [simuTitleImg1, simuTitleImg2, simuTitleImg3],
       simType: [
-        { text: '音声通話+SMS+データ通信', value: 720 },
-        { text: 'SMS+データ通信', value: 120 },
-        { text: 'データ通信のみ', value: 1 }
+        {
+          text: '音声通話+SMS+データ通信',
+          value: 720,
+          img: choosePlanOnseiUse
+        },
+        { text: 'SMS+データ通信', value: 120, img: choosePlanOnseiNo },
+        { text: 'データ通信のみ', value: 1, img: choosePlanDataOnly }
       ],
       plan: [
         { text: 'データ通信容量を選択してください', value: 0 },
-        { text: '100MB（970円/月額)', value: 970 },
-        { text: '200MB（1,020円/月額)', value: 1020 }
+        { text: '100MB（970円/月額)', value: 970, data: 100 },
+        { text: '200MB（1,020円/月額)', value: 1020, data: 200 }
       ],
       option: [
         { text: ['留守番', '電話機能'], value: 300 },

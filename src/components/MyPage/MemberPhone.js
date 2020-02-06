@@ -1,8 +1,6 @@
 import React, { Fragment } from 'react'
 
 import { useWindowSize } from '../../hooks/useWindowSize'
-import '../../scss/common.scss'
-import '../../scss/mypage.scss'
 import '../../scss/homePage.scss'
 
 const MemberPhone = props => {

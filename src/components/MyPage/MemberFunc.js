@@ -1,6 +1,5 @@
 import React from 'react'
-// import { Link } from 'react-router-dom'
-import '../../scss/mypage.scss'
+
 import MemberData from './MemberData'
 import MemberPhone from './MemberPhone'
 import MemberGame from './MemberGame'

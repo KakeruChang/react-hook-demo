@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMinus } from '@fortawesome/free-solid-svg-icons'
 import { faCircle } from '@fortawesome/free-regular-svg-icons'
 
-import '../../scss/order.scss'
+// import '../../scss/order.scss'
 import data from '../../data/data'
 import popup from '../../assets/order/icon_18_popup.png'
 import { useWindowSize } from '../../hooks/useWindowSize'
@@ -232,7 +232,7 @@ const BeforeOrder = () => {
   }
 
   return (
-    <div>
+    <div className='container'>
       <p className='h5 mt-4'>お申し込み前に、下記内容を必ずご確認ください。</p>
       <div className='order-privacy'>
         <div className='order-privacy-title'>

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { fireauth } from '../data/firebase'
 
 import '../scss/login.scss'
-import '../scss/common.scss'
 
 const Login = props => {
   const [email, setEmail] = useState('')

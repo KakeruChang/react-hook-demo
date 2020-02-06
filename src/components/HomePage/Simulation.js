@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom'
 import classNames from 'classnames'
 //import ChooseSimButton from './Simulation/ChooseSimButton'
 
-import '../../scss/homePage.scss'
-
 import { useWindowSize } from '../../hooks/useWindowSize'
 import kira from '../../assets/homePage/simulation/icon_kira.png'
 import calculator from '../../assets/homePage/simulation/icon_calculator.png'
@@ -250,11 +248,15 @@ const Simulation = () => {
         <div className='col-lg-4 col-12 row justify-content-center' key={index}>
           <div className='col-12  m-4'>
             <button
-              className={`simu-area px-5 ${
-                arrayToString(choice.text) === arrayToString(part[index].text)
-                  ? 'simu-area-checked'
-                  : ''
-              }`}
+              className={classNames(
+                'simu-area',
+                { 'px-3': windowSize.width >= 576 },
+                {
+                  'simu-area-checked':
+                    arrayToString(choice.text) ===
+                    arrayToString(part[index].text)
+                }
+              )}
               onClick={event => {
                 event.preventDefault()
                 funcChoose(choice, index)
@@ -298,7 +300,13 @@ const Simulation = () => {
             <img src={calculator} className='img-fluid' alt='' />
           </div>
         </div>
-        <div className='simu-first-part p-5'>
+        <div
+          className={classNames(
+            'simu-first-part',
+            { 'p-5': windowSize.width >= 576 },
+            { 'py-3 pl-4': windowSize.width < 576 }
+          )}
+        >
           <div>
             <img
               className='pr-2'
@@ -317,10 +325,15 @@ const Simulation = () => {
               'first-part',
               'radio'
             )}
-            　
           </div>
         </div>
-        <div className='simu-second-part  p-5'>
+        <div
+          className={classNames(
+            'simu-second-part',
+            { 'p-5': windowSize.width >= 576 },
+            { 'p-4': windowSize.width < 576 }
+          )}
+        >
           <div className='mb-4'>
             <img
               className='pr-2'
@@ -335,7 +348,13 @@ const Simulation = () => {
             {selectList(data.homePage.simulation.plan)}
           </div>
         </div>
-        <div className='simu-third-part px-5 pt-5 pb-1'>
+        <div
+          className={classNames(
+            'simu-third-part pt-5 pb-1',
+            { 'px-5': windowSize.width >= 576 },
+            { 'pl-4': windowSize.width < 576 }
+          )}
+        >
           <div>
             <img
               className='pr-2'

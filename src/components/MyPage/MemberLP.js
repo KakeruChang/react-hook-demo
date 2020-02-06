@@ -1,8 +1,5 @@
 import React from 'react'
 
-import '../../scss/common.scss'
-import '../../scss/mypage.scss'
-
 const MemberLP = props => {
   return (
     <div className='row'>

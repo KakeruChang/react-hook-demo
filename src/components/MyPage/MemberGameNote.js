@@ -1,8 +1,5 @@
 import React from 'react'
 
-import '../../scss/common.scss'
-import '../../scss/mypage.scss'
-
 const MemberGameNote = () => {
   return (
     <div className='row m-3 py-3 rounded game-note-bg'>
