@@ -1,8 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import classNames from 'classnames'
 
-// import '../../../scss/common.scss'
-// import '../../../scss/order.scss'
 import data from '../../../data/data'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 
@@ -16,52 +14,25 @@ const ChoosePlan = props => {
     star: '-'
   })
 
+  useEffect(() => {
+    if (!props.plan.sim.value) {
+      setSimActive({ text: '-', value: 0 })
+      return
+    }
+    setSimActive(props.plan.sim)
+  }, [props.plan.sim])
+
   const chooseSim = sim => {
-    console.log(sim)
-    // const part3Result = JSON.parse(JSON.stringify(part3Active))
-    // // check if this sim is chosen
-    // if (part1Active.text !== '' && sim.text === part1Active.text) {
-    //   const blankPart3 = [
-    //     { text: [], value: 0 },
-    //     { text: [], value: 0 },
-    //     { text: [], value: 0 },
-    //     { text: [], value: 0 },
-    //     { text: [], value: 0 }
-    //   ]
-    //   console.log('sim1')
-    //   setPart1Active({ text: '', value: 0 })
-    //   setPart3Active(blankPart3)
-    //   countPrice([
-    //     { index: 0, value: 0 },
-    //     { index: 2, value: blankPart3 }
-    //   ])
-    //   return
-    // }
-    // // limited Sim
-    // // choose 2nd or 3rd plan
-    // if (
-    //   sim.text === data.homePage.simulation.simType[1].text ||
-    //   sim.text === data.homePage.simulation.simType[2].text
-    // ) {
-    //   // choose 1st or 2nd or 3rd option
-    //   if (
-    //     part3Active[0].text.length !== 0 ||
-    //     part3Active[1].text.length !== 0 ||
-    //     part3Active[2].text.length !== 0
-    //   ) {
-    //     console.log('sim2')
-    //     // reset 1st or 2nd or 3rd option
-    //     for (let i = 0; i < 3; i++) {
-    //       part3Result[i] = { text: [], value: 0 }
-    //     }
-    //   }
-    // }
-    // countPrice([
-    //   { value: sim.value, index: 0 },
-    //   { value: part3Result, index: 2 }
-    // ])
     setSimActive({ text: sim.text, value: sim.value })
-    // setPart3Active(part3Result)
+    props.setPlan({
+      sim: { text: sim.text, value: sim.value },
+      data: {
+        value: props.plan.data.value,
+        data: props.plan.data.data,
+        game: props.plan.data.game,
+        star: props.plan.data.star
+      }
+    })
   }
   const choosePlan = event => {
     const planPrice = parseInt(event.target.value, 10)
@@ -73,7 +44,6 @@ const ChoosePlan = props => {
       game: countData(planPrice)[1],
       star: countData(planPrice)[2]
     })
-    // countPrice([{ index: 1, value: planPrice }])
     props.setPlan({
       sim: simActive,
       data: {
