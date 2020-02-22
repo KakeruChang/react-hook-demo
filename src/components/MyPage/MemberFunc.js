@@ -1,13 +1,33 @@
-import React from 'react'
+import React, { useEffect, useContext } from 'react'
 
 import MemberData from './MemberData'
 import MemberPhone from './MemberPhone'
 import MemberGame from './MemberGame'
 import MemberLP from './MemberLP'
-import data from '../../data/data'
+// import data from '../../data/data'
+import { HooksContext, UPDATE_POST } from '../../hooks/HookContext'
+import { findUser } from '../../api/firebase'
 
 const MemberFunc = () => {
-  const user = data.user
+  const { dispatch, data, user } = useContext(HooksContext)
+  console.log(useContext(HooksContext))
+  // const user = data.user
+
+  useEffect(() => {
+    if (user) {
+      if (user.email) {
+        checkExist()
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user])
+
+  const checkExist = async () => {
+    const result = await findUser(user.email)
+
+    dispatch({ type: UPDATE_POST, user: result[0].user })
+  }
+
   return (
     <>
       <nav>
@@ -69,7 +89,7 @@ const MemberFunc = () => {
           role='tabpanel'
           aria-labelledby='nav-data-tab'
         >
-          <MemberData data={user.data} />
+          <MemberData data={data.user.data} />
         </div>
         <div
           className='tab-pane fade border rounded'
@@ -77,7 +97,7 @@ const MemberFunc = () => {
           role='tabpanel'
           aria-labelledby='nav-phone-tab'
         >
-          <MemberPhone phone={user.phone} />
+          <MemberPhone phone={data.user.phone} />
         </div>
         <div
           className='tab-pane fade border rounded'
@@ -85,7 +105,7 @@ const MemberFunc = () => {
           role='tabpanel'
           aria-labelledby='nav-game-tab'
         >
-          <MemberGame games={user.games} data={user.data} />
+          <MemberGame games={data.user.games} data={data.user.data} />
         </div>
         <div
           className='tab-pane fade border rounded'
@@ -93,7 +113,7 @@ const MemberFunc = () => {
           role='tabpanel'
           aria-labelledby='nav-lp-tab'
         >
-          <MemberLP LP={user.LP} />
+          <MemberLP LP={data.user.LP} />
         </div>
       </div>
     </>

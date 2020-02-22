@@ -21,6 +21,13 @@ const ChoosePlan = props => {
     }
     setSimActive(props.plan.sim)
   }, [props.plan.sim])
+  useEffect(() => {
+    if (!props.plan.data.value) {
+      setDataActive({ value: 0, data: '-', game: '-', star: '-' })
+      return
+    }
+    setDataActive(props.plan.data)
+  }, [props.plan.data])
 
   const chooseSim = sim => {
     setSimActive({ text: sim.text, value: sim.value })
@@ -57,9 +64,9 @@ const ChoosePlan = props => {
   const countData = price => {
     switch (price) {
       case 970:
-        return [100, 1, 0]
+        return [10, 1, 0]
       case 1020:
-        return [200, 3, 1]
+        return [20, 3, 1]
       default:
         return ['-', '-', '-']
     }
@@ -112,7 +119,7 @@ const ChoosePlan = props => {
     return (
       <select
         className='form-control'
-        defaultValue='default'
+        defaultValue={props.plan.data.value || 'default'}
         onChange={choosePlan}
       >
         {list.map((item, index) => {
@@ -150,7 +157,7 @@ const ChoosePlan = props => {
           <tbody>
             <tr>
               <td className='font-13'>{simActive.text}</td>
-              <td className='h5'>{dataActive.data}MB</td>
+              <td className='h5'>{dataActive.data}GB</td>
               <td className='font-13'>{dataActive.game}つ</td>
               <td className='font-13'>{dataActive.star}個</td>
               <td>
@@ -173,7 +180,7 @@ const ChoosePlan = props => {
           </tr>
           <tr>
             <th scope='col'>データ通信容量</th>
-            <td className='h5'>{dataActive.data}MB</td>
+            <td className='h5'>{dataActive.data}GB</td>
           </tr>
           <tr>
             <th scope='col'>ゲーム連携数</th>

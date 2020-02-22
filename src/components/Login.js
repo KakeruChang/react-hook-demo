@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { fireauth } from '../data/firebase'
+import { fireauth } from '../api/firebase'
 
 import '../scss/login.scss'
 

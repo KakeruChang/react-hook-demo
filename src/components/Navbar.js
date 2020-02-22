@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSignal, faUser, faDoorOpen } from '@fortawesome/free-solid-svg-icons'
 import classNames from 'classnames'
 
-import { fireauth } from '../data/firebase'
-import HookContext from '../hooks/HookContext'
+import { fireauth } from '../api/firebase'
+import { HooksContext } from '../hooks/HookContext'
 import logo from '../assets/icon_logo.png'
 import logoTest from '../assets/hdr_btn_order2.png'
 import '../scss/Navbar.scss'
@@ -15,7 +15,7 @@ import { useWindowSize } from '../hooks/useWindowSize'
 
 const Navbar = props => {
   const [isActive, setActive] = useState(constants.navBar[0])
-  const isLoggined = useContext(HookContext).user
+  const isLoggined = useContext(HooksContext).user
   const windowSize = useWindowSize()
 
   const logout = () => {

@@ -17,42 +17,79 @@ import beforeOrderImgCredit from '../assets/order/order_credit.png'
 import choosePlanDataOnly from '../assets/order/icon_data_only.png'
 import choosePlanOnseiUse from '../assets/order/icon_onsei_use.png'
 import choosePlanOnseiNo from '../assets/order/icon_onsei_no.png'
+import completeImgAround from '../assets/order/bg-key.png'
+import completeImgCenter from '../assets/order/main-catch.png'
+import completeImgRWD from '../assets/order/main-catch-1.png'
 
 const data = {
   user: {
     data: {
-      thisMonth: { origin: 10, now: 9 },
-      before: { origin: 20, now: 8.8 },
-      plan: '音声通話なし・SMSあり'
+      thisMonth: { origin: 1, now: 0 },
+      before: { origin: 1, now: 0 },
+      plan: ''
     },
     phone: {
       thisMonth: {
-        date: { year: '2020', month: '01' },
+        date: { year: '', month: '' },
         content: [
           {
-            number: '070-1234-5678',
+            number: '',
             value: 0
           }
         ]
       },
       before: [
-        { value: 233, date: { year: '2019', month: '10' } },
-        { value: 100, date: { year: '2019', month: '11' } },
-        { value: 0, date: { year: '2019', month: '12' } }
+        // { value: 233, date: { year: '2019', month: '10' } },
+        // { value: 100, date: { year: '2019', month: '11' } },
+        // { value: 0, date: { year: '2019', month: '12' } }
       ]
     },
     games: [
       {
-        gameName: 'グランブルーファンタジー',
-        gameID: '1234567',
+        gameName: '',
+        gameID: '',
         state: true,
-        startDate: '2019年12月07日',
-        recentStarDate: '2020年01月10日',
-        star: 2
+        startDate: '',
+        recentStarDate: '',
+        star: 0
       }
     ],
-    LP: 1234
+    LP: 0
   },
+  // user: {
+  //   data: {
+  //     thisMonth: { origin: 10, now: 9 },
+  //     before: { origin: 20, now: 8.8 },
+  //     plan: '音声通話なし・SMSあり'
+  //   },
+  //   phone: {
+  //     thisMonth: {
+  //       date: { year: '2020', month: '01' },
+  //       content: [
+  //         {
+  //           number: '070-1234-5678',
+  //           value: 0
+  //         }
+  //       ]
+  //     },
+  //     before: [
+  //       { value: 233, date: { year: '2019', month: '10' } },
+  //       { value: 100, date: { year: '2019', month: '11' } },
+  //       { value: 0, date: { year: '2019', month: '12' } }
+  //     ]
+  //   },
+  //   games: [
+  //     {
+  //       gameName: 'グランブルーファンタジー',
+  //       gameID: '1234567',
+  //       state: true,
+  //       startDate: '2019年12月07日',
+  //       recentStarDate: '2020年01月10日',
+  //       star: 2
+  //     }
+  //   ],
+  //   LP: 1234
+  // },
   homePage: {
     mainMenu: [
       {
@@ -138,8 +175,8 @@ const data = {
       ],
       plan: [
         { text: 'データ通信容量を選択してください', value: 0 },
-        { text: '100MB（970円/月額)', value: 970, data: 100 },
-        { text: '200MB（1,020円/月額)', value: 1020, data: 200 }
+        { text: '10GB（970円/月額)', value: 970, data: 10 },
+        { text: '20GB（1,020円/月額)', value: 1020, data: 20 }
       ],
       option: [
         { text: ['留守番', '電話機能'], value: 300 },
@@ -267,6 +304,11 @@ const data = {
         withMNP: { email: true, credential: true, MNPNumber: true }
         // note:['使用できる各公的書類についてはこちら','MNP予約番号は電話番号を変えることなく他社からLinksMateに乗り換える場合に必要となります']
       }
+    },
+    complete: {
+      center: completeImgCenter,
+      around: completeImgAround,
+      RWD: completeImgRWD
     }
   }
 }

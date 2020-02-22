@@ -37,12 +37,12 @@ const MemberData = props => {
         <div className='row mx-0 my-3 justify-content-center'>
           <span className='bg-primary col-1'></span>
           <span className='col-6'>当月のデータ通信残量</span>
-          <span className='col-3'>{1024 * 10}MB</span>
+          <span className='col-3'>{1024 * props.data.thisMonth.now}MB</span>
         </div>
         <div className='row mx-0 my-3 justify-content-center'>
           <span className='bg-warning col-1'></span>
           <span className='col-6'>繰り越しデータ通信残量</span>
-          <span className='col-3'>{1024 * 8.8}MB</span>
+          <span className='col-3'>{1024 * props.data.before.now}MB</span>
         </div>
       </div>
       <div className='col-md-6 col-12'>

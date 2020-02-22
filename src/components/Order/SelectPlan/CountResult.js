@@ -98,6 +98,11 @@ const CountResult = props => {
       finalMonthly = finalMonthly + item.value
     })
     props.setResult({ init: finalInit, monthly: finalMonthly })
+
+    // 5.set the apply data
+    let applyCopy = { ...props.apply }
+    applyCopy.order = { initResult, monthlyResult }
+    props.setApply(applyCopy)
   }
 
   useEffect(() => {

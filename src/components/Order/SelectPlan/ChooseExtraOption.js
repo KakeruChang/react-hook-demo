@@ -27,7 +27,6 @@ const ChooseExtraOption = props => {
   }
 
   const chooseOption = (option, index) => {
-    console.log('chooseOption')
     const result = JSON.parse(JSON.stringify(optionActive))
 
     // check if this option is chosen
@@ -36,7 +35,6 @@ const ChooseExtraOption = props => {
       option.text[0] === optionActive[index].text[0] &&
       option.text[1] === optionActive[index].text[1]
     ) {
-      console.log('check if this option is chosen')
       result[index] = { text: [], value: 0 }
       setOptionActive(result)
       props.setOption(result)
@@ -87,7 +85,6 @@ const ChooseExtraOption = props => {
             )}
             onClick={event => {
               event.preventDefault()
-              console.log('click')
               chooseOption(choice, index)
             }}
           >
@@ -167,6 +164,10 @@ const ChooseExtraOption = props => {
     checkSim(props.plan.sim)
     // eslint-disable-next-line
   }, [props.plan.sim])
+  useEffect(() => {
+    setOptionActive(props.option)
+    // eslint-disable-next-line
+  }, [props.option])
 
   return (
     <div className='container'>

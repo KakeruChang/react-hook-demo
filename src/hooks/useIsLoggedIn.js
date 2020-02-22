@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { fireauth } from '../data/firebase'
+import { fireauth } from '../api/firebase'
 
 export const useIsLoggedIn = (initialValue = {}) => {
   const [isLoggedIn, setIsLoggedIn] = useState(initialValue)

@@ -428,10 +428,10 @@ const BeforeOrder = () => {
       <div className='row justify-content-center my-3'>
         <div className='col-md-6 col-12'>
           <Link
-            className='btn btn-warning text-light w-100 py-3'
+            className='btn btn-warning text-light w-100 py-2'
             to='/order/selectplan'
           >
-            <div className='h3'>プランを選ぶ</div>
+            <div className='h5'>プランを選ぶ</div>
           </Link>
         </div>
       </div>

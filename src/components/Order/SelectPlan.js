@@ -1,17 +1,40 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 import ChoosePlan from './SelectPlan/ChoosePlan'
 import ChooseExtraOption from './SelectPlan/ChooseExtraOption'
 import CountResult from './SelectPlan/CountResult'
+import NecessaryInput from '../common/NecessaryInput'
 
-const SelectPlan = () => {
-  const [plan, setPlan] = useState({ sim: {}, data: {} })
-  const [option, setOption] = useState([])
+const SelectPlan = props => {
+  const { history, plan, setPlan, option, setOption } = props
   const [result, setResult] = useState({ init: 0, monthly: 0 })
+  const [empty, setEmpty] = useState([])
+
+  const checkEmpty = () => {
+    let checkResult = []
+    if (!plan.sim.value) {
+      checkResult.push('利用する機能を選ぶ')
+    }
+    if (!plan.data.value) {
+      checkResult.push('データ通信容量を選ぶ')
+    }
+    setEmpty(checkResult)
+  }
+
+  const goToInfo = () => {
+    if (empty.length === 0) {
+      history.push('/order/informationinput')
+    }
+  }
+
+  useEffect(() => {
+    checkEmpty()
+    // eslint-disable-next-line
+  }, [plan])
 
   return (
-    <div>
+    <>
       <div className='bg-dark'>
         <div className='container'>
           <div className='h5 py-2 my-3 font-weight-bold text-light'>
@@ -33,6 +56,7 @@ const SelectPlan = () => {
       <div className='bg-grey py-3'>
         <ChooseExtraOption
           plan={plan}
+          option={option}
           setPlan={setPlan}
           setOption={setOption}
         />
@@ -54,31 +78,40 @@ const SelectPlan = () => {
         </div>
       </div>
       <div className='bg-sky-blue py-3'>
-        <CountResult plan={plan} option={option} setResult={setResult} />
+        <CountResult
+          plan={plan}
+          option={option}
+          setResult={setResult}
+          apply={props.apply}
+          setApply={props.setApply}
+        />
+      </div>
+      <div className='container my-5'>
+        {empty.length > 0 && <NecessaryInput inputs={empty} />}
       </div>
       <div className='container'>
         <div className='row justify-content-center my-3'>
           <div className='col-12'>
-            <Link
-              className='btn btn-warning text-light w-100 py-3'
-              to='/order/informationinput'
+            <button
+              className='btn btn-warning text-light w-100 py-2'
+              onClick={goToInfo}
             >
-              <div className='h3'>次へ</div>
-            </Link>
+              <div className='h5'>次へ</div>
+            </button>
           </div>
         </div>
         <div className='row justify-content-center my-3'>
           <div className='col-md-6 col-12'>
             <Link
-              className='simu-area text-decoration-none w-100 py-3'
+              className='simu-area text-decoration-none w-100 py-2'
               to='/order'
             >
-              <div className='h3'>戻る</div>
+              <div className='h5'>戻る</div>
             </Link>
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 
