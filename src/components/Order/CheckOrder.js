@@ -9,6 +9,9 @@ const CheckOrder = props => {
 
   const makeFakeData = () => {
     const thisDay = moment()
+    const beforeOneMonth = moment().subtract(1, 'months')
+    const beforeTwoMonth = moment().subtract(2, 'months')
+    const beforeThreeMonth = moment().subtract(3, 'months')
     const today = {
       year: thisDay.format('YYYY'),
       month: thisDay.format('MM'),
@@ -43,22 +46,22 @@ const CheckOrder = props => {
           {
             value: Math.floor(Math.random() * 1000),
             date: {
-              year: thisDay.subtract(3, 'months').format('YYYY'),
-              month: thisDay.subtract(3, 'months').format('MM')
+              year: beforeThreeMonth.format('YYYY'),
+              month: beforeThreeMonth.format('MM')
             }
           },
           {
             value: Math.floor(Math.random() * 1000),
             date: {
-              year: thisDay.subtract(2, 'months').format('YYYY'),
-              month: thisDay.subtract(2, 'months').format('MM')
+              year: beforeTwoMonth.format('YYYY'),
+              month: beforeTwoMonth.format('MM')
             }
           },
           {
             value: Math.floor(Math.random() * 1000),
             date: {
-              year: thisDay.subtract(1, 'months').format('YYYY'),
-              month: thisDay.subtract(1, 'months').format('MM')
+              year: beforeOneMonth.format('YYYY'),
+              month: beforeOneMonth.format('MM')
             }
           }
         ]
@@ -68,17 +71,16 @@ const CheckOrder = props => {
           gameName: 'グランブルーファンタジー',
           gameID: Math.floor(Math.random() * 10000000),
           state: true,
-          startDate: `${thisDay
-            .subtract(2, 'months')
-            .format('YYYY')}年${thisDay
-            .subtract(2, 'months')
-            .format('MM')}月${thisDay.subtract(2, 'months').format('DD')}日`,
+          startDate: `${beforeTwoMonth.format('YYYY')}年${beforeTwoMonth.format(
+            'MM'
+          )}月${beforeTwoMonth.format('DD')}日`,
           recentStarDate: `${today.year}年${today.month}月${today.day}日`,
           star: 2
         }
       ],
       LP: Math.floor(Math.random() * 10000)
     }
+
     return user
   }
 
@@ -104,14 +106,15 @@ const CheckOrder = props => {
   }
 
   useEffect(() => {
-    if (Object.keys(apply.order).length === 0 || !apply.info.address) {
-      history.push('/order')
-    }
+    // if (Object.keys(apply.order).length === 0 || !apply.info.address) {
+    //   history.push('/order')
+    // }
     // eslint-disable-next-line
   }, [])
 
   return (
     <>
+      <button onClick={makeFakeData}>test</button>
       <div className='bg-dark'>
         <div className='container'>
           <div className='h5 py-2 my-3 font-weight-bold text-light'>
