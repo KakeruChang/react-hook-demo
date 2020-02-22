@@ -62,9 +62,6 @@ const OrderTitle = props => {
                   'p-1': windowSize.width < adjustFor320PX
                 }
               )}
-              onClick={() => {
-                setOrderActive(item.name)
-              }}
               key={item.index}
             >
               <div

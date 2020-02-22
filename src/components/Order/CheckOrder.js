@@ -106,15 +106,14 @@ const CheckOrder = props => {
   }
 
   useEffect(() => {
-    // if (Object.keys(apply.order).length === 0 || !apply.info.address) {
-    //   history.push('/order')
-    // }
+    if (Object.keys(apply.order).length === 0 || !apply.info.address) {
+      history.push('/order')
+    }
     // eslint-disable-next-line
   }, [])
 
   return (
     <>
-      <button onClick={makeFakeData}>test</button>
       <div className='bg-dark'>
         <div className='container'>
           <div className='h5 py-2 my-3 font-weight-bold text-light'>
