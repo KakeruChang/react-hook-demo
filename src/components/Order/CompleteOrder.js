@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom'
 import classNames from 'classnames'
 
 import data from '../../data/data'
-import { useWindowSize } from '../../hooks/useWindowSize'
+import useWindowSize from '../../hooks/useWindowSize'
 
 const CompleteOrder = () => {
-  const width = useWindowSize().width
+  const { width } = useWindowSize()
 
   return (
     <div className='container'>

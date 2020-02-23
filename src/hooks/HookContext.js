@@ -1,7 +1,7 @@
-import React, { useReducer } from 'react'
-import { createContext } from 'react'
+import React, { useReducer, createContext } from 'react'
+import PropTypes from 'prop-types'
 
-import { useIsLoggedIn } from '../hooks/useIsLoggedIn'
+import useIsLoggedIn from './useIsLoggedIn'
 import initData from '../data/data'
 
 export const HooksContext = createContext()
@@ -25,9 +25,12 @@ export const Linksmate = props => {
   })
 
   return (
-    // <RubyContext.Provider value={{ postData, dispatch }}>
     <HooksContext.Provider value={{ user, data, dispatch }}>
       {children}
     </HooksContext.Provider>
   )
+}
+
+Linksmate.propTypes = {
+  children: PropTypes.arrayOf(PropTypes.any).isRequired
 }

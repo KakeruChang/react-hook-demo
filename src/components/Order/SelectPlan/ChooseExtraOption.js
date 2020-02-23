@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-import { useWindowSize } from '../../../hooks/useWindowSize'
+import useWindowSize from '../../../hooks/useWindowSize'
 import data from '../../../data/data'
 import popup from '../../../assets/order/icon_18_popup.png'
 
 const ChooseExtraOption = props => {
   const windowSize = useWindowSize()
+  const { setOption, setPlan, plan, option } = props
   const [optionActive, setOptionActive] = useState([
     { text: [], value: 0 },
     { text: [], value: 0 },
@@ -19,46 +21,45 @@ const ChooseExtraOption = props => {
     if (typeof array === 'object' && array.length) {
       let result = ''
       array.forEach(item => {
-        result = result + item
+        result += item
       })
       return result
     }
     return array
   }
 
-  const chooseOption = (option, index) => {
+  const chooseOption = (theOption, index) => {
     const result = JSON.parse(JSON.stringify(optionActive))
 
     // check if this option is chosen
     if (
       optionActive[index].text.length !== 0 &&
-      option.text[0] === optionActive[index].text[0] &&
-      option.text[1] === optionActive[index].text[1]
+      theOption.text[0] === optionActive[index].text[0] &&
+      theOption.text[1] === optionActive[index].text[1]
     ) {
       result[index] = { text: [], value: 0 }
       setOptionActive(result)
-      props.setOption(result)
+      setOption(result)
       // countPrice([{ index: 2, value: result }])
       return
     }
 
     // limited option
     // get result
-    result[index] = Object.assign({}, option)
-    const plan = Object.assign({}, props.plan)
+    result[index] = { ...theOption }
     if (
-      option.text[0] === data.homePage.simulation.option[0].text[0] ||
-      option.text[0] === data.homePage.simulation.option[1].text[0] ||
-      option.text[0] === data.homePage.simulation.option[2].text[0]
+      theOption.text[0] === data.homePage.simulation.option[0].text[0] ||
+      theOption.text[0] === data.homePage.simulation.option[1].text[0] ||
+      theOption.text[0] === data.homePage.simulation.option[2].text[0]
     ) {
       const newPart1 = {
         text: data.homePage.simulation.simType[0].text,
         value: data.homePage.simulation.simType[0].value
       }
       plan.sim = newPart1
-      props.setPlan(plan)
+      setPlan(plan)
       setOptionActive(result)
-      props.setOption(result)
+      setOption(result)
       // countPrice([
       //   { value: newPart1.value, index: 0 },
       //   { value: result, index: 2 }
@@ -75,7 +76,10 @@ const ChooseExtraOption = props => {
   const optionButton = (list, part) => {
     return list.map((choice, index) => {
       return (
-        <div className='col-12 row justify-content-center mx-0' key={index}>
+        <div
+          className='col-12 row justify-content-center mx-0'
+          key={choice.text[0]}
+        >
           <div
             className={classNames(
               'col-12 bg-white border border-primary rounded my-3',
@@ -87,6 +91,7 @@ const ChooseExtraOption = props => {
               event.preventDefault()
               chooseOption(choice, index)
             }}
+            aria-hidden='true'
           >
             <input
               className={classNames(
@@ -97,7 +102,7 @@ const ChooseExtraOption = props => {
               name='chooseExtraOption'
               id={`extraOption${index}`}
               value={choice.text}
-              onChange={event => {}}
+              onChange={() => {}}
               checked={
                 arrayToString(choice.text) === arrayToString(part[index].text)
               }
@@ -110,9 +115,9 @@ const ChooseExtraOption = props => {
                 { h6: windowSize.width < 576 }
               )}
             >
-              {choice.text.map((item, index) => {
+              {choice.text.map(item => {
                 return (
-                  <span className='font-weight-bold' key={index}>
+                  <span className='font-weight-bold' key={item}>
                     {item}
                   </span>
                 )
@@ -152,7 +157,7 @@ const ChooseExtraOption = props => {
         optionActive[2].text.length !== 0
       ) {
         // reset 1st or 2nd or 3rd option
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 3; i += 1) {
           optionResult[i] = { text: [], value: 0 }
         }
         setOptionActive(optionResult)
@@ -161,13 +166,13 @@ const ChooseExtraOption = props => {
   }
 
   useEffect(() => {
-    checkSim(props.plan.sim)
+    checkSim(plan.sim)
     // eslint-disable-next-line
-  }, [props.plan.sim])
+  }, [plan.sim])
   useEffect(() => {
-    setOptionActive(props.option)
+    setOptionActive(option)
     // eslint-disable-next-line
-  }, [props.option])
+  }, [option])
 
   return (
     <div className='container'>
@@ -175,6 +180,13 @@ const ChooseExtraOption = props => {
       <div className='lm-note ml-4'>価格表示はすべて「税抜き」です。</div>
     </div>
   )
+}
+
+ChooseExtraOption.propTypes = {
+  plan: PropTypes.objectOf(PropTypes.object).isRequired,
+  option: PropTypes.arrayOf(PropTypes.object).isRequired,
+  setOption: PropTypes.func.isRequired,
+  setPlan: PropTypes.func.isRequired
 }
 
 export default ChooseExtraOption

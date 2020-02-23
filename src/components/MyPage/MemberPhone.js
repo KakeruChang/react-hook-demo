@@ -1,11 +1,12 @@
 import React, { Fragment } from 'react'
+import PropTypes from 'prop-types'
 
-import { useWindowSize } from '../../hooks/useWindowSize'
+import useWindowSize from '../../hooks/useWindowSize'
 import '../../scss/homePage.scss'
 
 const MemberPhone = props => {
   const windowSize = useWindowSize()
-  const phone = props.phone
+  const { phone } = props
 
   if (windowSize.width < 992) {
     return (
@@ -16,9 +17,9 @@ const MemberPhone = props => {
             月のご利用状況
           </div>
           <div className='row m-3'>
-            {phone.thisMonth.content.map((item, index) => {
+            {phone.thisMonth.content.map(item => {
               return (
-                <Fragment key={index}>
+                <Fragment key={item.number}>
                   <div className='col-8'>{item.number}</div>
                   <div className='col-4'>{item.value}円</div>
                 </Fragment>
@@ -49,9 +50,9 @@ const MemberPhone = props => {
             直近3ヶ月のご利用状況
           </div>
           <div className='row m-3'>
-            {phone.before.map((item, index) => {
+            {phone.before.map(item => {
               return (
-                <Fragment key={index}>
+                <Fragment key={`${item.date.year}${item.date.month}`}>
                   <div className='col-8'>
                     {item.date.year}年{item.date.month}月
                   </div>
@@ -66,7 +67,9 @@ const MemberPhone = props => {
         </div>
         <div className='col-12 row justify-content-center mt-3'>
           <div>
-            <button className='simu-area'>詳しい通話明細はこちら</button>
+            <button type='button' className='simu-area'>
+              詳しい通話明細はこちら
+            </button>
           </div>
         </div>
       </div>
@@ -80,9 +83,9 @@ const MemberPhone = props => {
           月のご利用状況
         </div>
         <div className='row m-3'>
-          {phone.thisMonth.content.map((item, index) => {
+          {phone.thisMonth.content.map(item => {
             return (
-              <Fragment key={index}>
+              <Fragment key={item.number}>
                 <div className='col-8'>{item.number}</div>
                 <div className='col-4'>{item.value}円</div>
               </Fragment>
@@ -93,9 +96,9 @@ const MemberPhone = props => {
       <div className='col-6'>
         <div className='lm-title border-primary m-3'>直近3ヶ月のご利用状況</div>
         <div className='row m-3'>
-          {phone.before.map((item, index) => {
+          {phone.before.map(item => {
             return (
-              <Fragment key={index}>
+              <Fragment key={`${item.date.year}${item.date.month}`}>
                 <div className='col-8'>
                   {item.date.year}年{item.date.month}月
                 </div>
@@ -132,11 +135,17 @@ const MemberPhone = props => {
       </div>
       <div className='col-12 row justify-content-center mt-3'>
         <div>
-          <button className='simu-area'>詳しい通話明細はこちら</button>
+          <button type='button' className='simu-area'>
+            詳しい通話明細はこちら
+          </button>
         </div>
       </div>
     </div>
   )
+}
+
+MemberPhone.propTypes = {
+  phone: PropTypes.objectOf(PropTypes.any).isRequired
 }
 
 export default MemberPhone

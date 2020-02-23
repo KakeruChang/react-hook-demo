@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const NecessaryInput = props => {
   const { inputs } = props
@@ -19,6 +20,10 @@ const NecessaryInput = props => {
       </div>
     </div>
   )
+}
+
+NecessaryInput.propTypes = {
+  inputs: PropTypes.arrayOf(PropTypes.string).isRequired
 }
 
 export default NecessaryInput

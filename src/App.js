@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 // import { renderRoutes } from 'react-router-config'
 import 'bootstrap/scss/bootstrap.scss'
@@ -8,15 +9,15 @@ import 'bootstrap/js/src/index'
 import renderRoutesWithAuth from './router/renderRoutesWithAuth'
 import routes from './router/routes'
 import './scss/common.scss'
-import './App.css'
-import { useIsLoggedIn } from './hooks/useIsLoggedIn'
+import useIsLoggedIn from './hooks/useIsLoggedIn'
 import { Linksmate } from './hooks/HookContext'
 import Navbar from './components/Navbar'
 import TopMenu from './components/TopMenu'
 import OwnershipAnnouncement from './components/OwnershipAnnouncement'
 
 function App(props) {
-  const path = props.location.pathname
+  const { location } = props
+  const path = location.pathname
 
   return (
     <Linksmate>
@@ -33,6 +34,10 @@ function App(props) {
       <OwnershipAnnouncement />
     </Linksmate>
   )
+}
+
+App.propTypes = {
+  location: PropTypes.objectOf(PropTypes.any).isRequired
 }
 
 export default withRouter(App)

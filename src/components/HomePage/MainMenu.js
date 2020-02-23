@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import classNames from 'classnames'
 
 import data from '../../data/data'
-import { useWindowSize } from '../../hooks/useWindowSize'
+import useWindowSize from '../../hooks/useWindowSize'
 
 const MainMenu = () => {
   const [dataMainMenu, setDataMainMenu] = useState(data.homePage.mainMenu)
@@ -13,7 +13,7 @@ const MainMenu = () => {
     if (windowSize.width <= 990) {
       return
     }
-    let origin = JSON.parse(JSON.stringify(data.homePage.mainMenu))
+    const origin = JSON.parse(JSON.stringify(data.homePage.mainMenu))
 
     if (index || index === 0) {
       origin[index].isHover = true
@@ -34,19 +34,19 @@ const MainMenu = () => {
       highLightColor = 'primary'
     }
 
-    return list.map((text, index) => {
+    return list.map(text => {
       if (text.highLight) {
         return (
           <span
             className={`h5 font-weight-bolder text-${highLightColor}`}
-            key={index}
+            key={text.text}
           >
             {text.text}
           </span>
         )
       }
       return (
-        <p className='card-text text-dark font-weight-bold' key={index}>
+        <p className='card-text text-dark font-weight-bold' key={text.text}>
           {text.text}
         </p>
       )
@@ -55,7 +55,7 @@ const MainMenu = () => {
 
   const menu = dataMainMenu.map((item, index) => {
     return (
-      <div className='col-lg-3 col-md-6 col-12 mb-4' key={index}>
+      <div className='col-lg-3 col-md-6 col-12 mb-4' key={item.footerText}>
         <Link to='/' className='text-decoration-none'>
           <div className='card h-100'>
             <div className='card-body main-menu-body row justify-content-center pb-0 mx-0 bg-light'>

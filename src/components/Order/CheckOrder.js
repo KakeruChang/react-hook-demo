@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-import { signup, addData } from '../../api/firebase'
 import moment from 'moment'
+import { signup, addData } from '../../api/firebase'
 
 const CheckOrder = props => {
   const { apply, plan, history, setApply } = props
@@ -212,6 +213,13 @@ const CheckOrder = props => {
       </div>
     </>
   )
+}
+
+CheckOrder.propTypes = {
+  apply: PropTypes.objectOf(PropTypes.object).isRequired,
+  setApply: PropTypes.func.isRequired,
+  history: PropTypes.objectOf(PropTypes.any).isRequired,
+  plan: PropTypes.objectOf(PropTypes.object).isRequired
 }
 
 export default CheckOrder

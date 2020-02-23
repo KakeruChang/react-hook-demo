@@ -1,6 +1,9 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const MemberLP = props => {
+  const { LP } = props
+
   return (
     <div className='row'>
       <div className='col-12'>
@@ -10,7 +13,7 @@ const MemberLP = props => {
             使用できるLP
           </div>
           <div className='col-md-9 col-12 py-3 border border-primary text-right h5 mb-0'>
-            {props.LP}LP
+            {LP}LP
           </div>
         </div>
         <div className='lm-note lp-note'>
@@ -20,13 +23,17 @@ const MemberLP = props => {
           音声通話料金の決済は、使用月の2ヵ月後です。
         </div>
         <div className='row  m-3'>
-          <button className='btn btn-primary w-100 text-light'>
+          <button type='button' className='btn btn-primary w-100 text-light'>
             LPを購入する
           </button>
         </div>
       </div>
     </div>
   )
+}
+
+MemberLP.propTypes = {
+  LP: PropTypes.number.isRequired
 }
 
 export default MemberLP

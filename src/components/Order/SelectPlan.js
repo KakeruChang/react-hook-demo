@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 import ChoosePlan from './SelectPlan/ChoosePlan'
@@ -7,12 +8,12 @@ import CountResult from './SelectPlan/CountResult'
 import NecessaryInput from '../common/NecessaryInput'
 
 const SelectPlan = props => {
-  const { history, plan, setPlan, option, setOption } = props
+  const { history, plan, setPlan, option, setOption, apply, setApply } = props
   const [result, setResult] = useState({ init: 0, monthly: 0 })
   const [empty, setEmpty] = useState([])
 
   const checkEmpty = () => {
-    let checkResult = []
+    const checkResult = []
     if (!plan.sim.value) {
       checkResult.push('利用する機能を選ぶ')
     }
@@ -82,8 +83,8 @@ const SelectPlan = props => {
           plan={plan}
           option={option}
           setResult={setResult}
-          apply={props.apply}
-          setApply={props.setApply}
+          apply={apply}
+          setApply={setApply}
         />
       </div>
       <div className='container my-5'>
@@ -93,6 +94,7 @@ const SelectPlan = props => {
         <div className='row justify-content-center my-3'>
           <div className='col-12'>
             <button
+              type='button'
               className='btn btn-warning text-light w-100 py-2'
               onClick={goToInfo}
             >
@@ -113,6 +115,16 @@ const SelectPlan = props => {
       </div>
     </>
   )
+}
+
+SelectPlan.propTypes = {
+  history: PropTypes.objectOf(PropTypes.any).isRequired,
+  plan: PropTypes.objectOf(PropTypes.object).isRequired,
+  option: PropTypes.arrayOf(PropTypes.object).isRequired,
+  apply: PropTypes.objectOf(PropTypes.object).isRequired,
+  setPlan: PropTypes.func.isRequired,
+  setOption: PropTypes.func.isRequired,
+  setApply: PropTypes.func.isRequired
 }
 
 export default SelectPlan

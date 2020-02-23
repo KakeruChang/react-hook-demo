@@ -1,61 +1,63 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-import { useWindowSize } from '../../../hooks/useWindowSize'
+import useWindowSize from '../../../hooks/useWindowSize'
 
 const CountResult = props => {
+  const { plan, option, apply, setApply, setResult } = props
   const windowSize = useWindowSize()
   const [initialCost, setInitialCost] = useState([])
   const [monthlyCost, setMonthlyCost] = useState([])
 
   const countPrice = () => {
-    let initResult = []
-    let monthlyResult = []
+    const initResult = []
+    const monthlyResult = []
 
     // 1.countplan
-    if (props.plan.data.value && props.plan.sim.value) {
+    if (plan.data.value && plan.sim.value) {
       initResult.push({
-        text: `${props.plan.data.data}GBプラン(${props.plan.sim.text})`,
-        value: props.plan.data.value + props.plan.sim.value
+        text: `${plan.data.data}GBプラン(${plan.sim.text})`,
+        value: plan.data.value + plan.sim.value
       })
       monthlyResult.push({
-        text: `${props.plan.data.data}GBプラン(${props.plan.sim.text})`,
-        value: props.plan.data.value + props.plan.sim.value
+        text: `${plan.data.data}GBプラン(${plan.sim.text})`,
+        value: plan.data.value + plan.sim.value
       })
-    } else if (props.plan.data.value) {
+    } else if (plan.data.value) {
       initResult.push({
-        text: `${props.plan.data.data}GBプラン`,
-        value: props.plan.data.value
+        text: `${plan.data.data}GBプラン`,
+        value: plan.data.value
       })
       monthlyResult.push({
-        text: `${props.plan.data.data}GBプラン`,
-        value: props.plan.data.value
+        text: `${plan.data.data}GBプラン`,
+        value: plan.data.value
       })
-    } else if (props.plan.sim.value) {
+    } else if (plan.sim.value) {
       initResult.push({
-        text: `(${props.plan.sim.text})`,
-        value: props.plan.sim.value
+        text: `(${plan.sim.text})`,
+        value: plan.sim.value
       })
       monthlyResult.push({
-        text: `(${props.plan.sim.text})`,
-        value: props.plan.sim.value
+        text: `(${plan.sim.text})`,
+        value: plan.sim.value
       })
     }
 
     // 2.countoption
-    props.option.forEach(option => {
-      if (option.text.length !== 0) {
+    option.forEach(theOption => {
+      if (theOption.text.length !== 0) {
         let optionText = ''
-        option.text.forEach(text => {
-          optionText = optionText + text
+        theOption.text.forEach(text => {
+          optionText += text
         })
         initResult.push({
           text: optionText,
-          value: option.value
+          value: theOption.value
         })
         monthlyResult.push({
           text: optionText,
-          value: option.value
+          value: theOption.value
         })
       }
     })
@@ -72,10 +74,10 @@ const CountResult = props => {
     let taxInit = 0
     let taxMonthly = 0
     initResult.forEach(item => {
-      taxInit = taxInit + item.value / 10
+      taxInit += item.value / 10
     })
     monthlyResult.forEach(item => {
-      taxMonthly = taxMonthly + item.value / 10
+      taxMonthly += item.value / 10
     })
     initResult.push({
       text: '消費税等',
@@ -92,23 +94,23 @@ const CountResult = props => {
     let finalInit = 0
     let finalMonthly = 0
     initResult.forEach(item => {
-      finalInit = finalInit + item.value
+      finalInit += item.value
     })
     monthlyResult.forEach(item => {
-      finalMonthly = finalMonthly + item.value
+      finalMonthly += item.value
     })
-    props.setResult({ init: finalInit, monthly: finalMonthly })
+    setResult({ init: finalInit, monthly: finalMonthly })
 
     // 5.set the apply data
-    let applyCopy = { ...props.apply }
+    const applyCopy = { ...apply }
     applyCopy.order = { initResult, monthlyResult }
-    props.setApply(applyCopy)
+    setApply(applyCopy)
   }
 
   useEffect(() => {
     countPrice()
     // eslint-disable-next-line
-  }, [props.plan, props.option])
+  }, [plan, option])
 
   return (
     <div className='container'>
@@ -116,39 +118,45 @@ const CountResult = props => {
         <div className='bg-white rounded p-3'>
           <div className='lm-title border-primary my-3'>初期費用</div>
           <div className='px-5'>
-            {initialCost.map((item, index) => (
-              <div
-                className='row justify-content-between border-bottom border-primary'
-                key={index}
-              >
-                <span className='px-1'>{item.text}</span>
-                <span
-                  className={classNames('px-1', {
-                    'col-12 text-right font-weight-bold': windowSize.width < 576
-                  })}
+            {initialCost.map(item => {
+              return (
+                <div
+                  className='row justify-content-between border-bottom border-primary'
+                  key={item.text}
                 >
-                  {item.value}円
-                </span>
-              </div>
-            ))}
+                  <span className='px-1'>{item.text}</span>
+                  <span
+                    className={classNames('px-1', {
+                      'col-12 text-right font-weight-bold':
+                        windowSize.width < 576
+                    })}
+                  >
+                    {item.value}円
+                  </span>
+                </div>
+              )
+            })}
           </div>
           <div className='lm-title border-primary my-3'>月々のお支払い目安</div>
           <div className='px-5'>
-            {monthlyCost.map((item, index) => (
-              <div
-                className='row justify-content-between border-bottom border-primary'
-                key={index}
-              >
-                <span className='px-1'>{item.text}</span>
-                <span
-                  className={classNames('px-1', {
-                    'col-12 text-right font-weight-bold': windowSize.width < 576
-                  })}
+            {monthlyCost.map(item => {
+              return (
+                <div
+                  className='row justify-content-between border-bottom border-primary'
+                  key={item.text}
                 >
-                  {item.value}円
-                </span>
-              </div>
-            ))}
+                  <span className='px-1'>{item.text}</span>
+                  <span
+                    className={classNames('px-1', {
+                      'col-12 text-right font-weight-bold':
+                        windowSize.width < 576
+                    })}
+                  >
+                    {item.value}円
+                  </span>
+                </div>
+              )
+            })}
           </div>
         </div>
         <div className='lm-note font-13'>
@@ -169,6 +177,14 @@ const CountResult = props => {
       </div>
     </div>
   )
+}
+
+CountResult.propTypes = {
+  plan: PropTypes.objectOf(PropTypes.object).isRequired,
+  option: PropTypes.arrayOf(PropTypes.object).isRequired,
+  apply: PropTypes.objectOf(PropTypes.object).isRequired,
+  setApply: PropTypes.func.isRequired,
+  setResult: PropTypes.func.isRequired
 }
 
 export default CountResult

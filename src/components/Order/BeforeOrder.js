@@ -4,10 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMinus } from '@fortawesome/free-solid-svg-icons'
 import { faCircle } from '@fortawesome/free-regular-svg-icons'
 
-// import '../../scss/order.scss'
 import data from '../../data/data'
 import popup from '../../assets/order/icon_18_popup.png'
-import { useWindowSize } from '../../hooks/useWindowSize'
+import useWindowSize from '../../hooks/useWindowSize'
 
 const BeforeOrder = () => {
   const windowSize = useWindowSize()
@@ -22,10 +21,13 @@ const BeforeOrder = () => {
   }
 
   const beforeOrderTableTH = obj => {
-    let th = []
-    for (let key in obj) {
+    const th = []
+    // for (let key in obj) {
+    //   th.push(<td key={key}>{tableResult(obj[key])}</td>)
+    // }
+    Object.keys(obj).forEach(key => {
       th.push(<td key={key}>{tableResult(obj[key])}</td>)
-    }
+    })
     return th
   }
 
@@ -35,7 +37,7 @@ const BeforeOrder = () => {
         <table className='table table-bordered necessary-table'>
           <thead className='thead-primary'>
             <tr>
-              <th scope='col'></th>
+              <th scope='col' aria-label='blank' />
               <th scope='col'>
                 <div className='row justify-content-center'>
                   <div className='font-weight-bold col-12 text-center'>
@@ -114,7 +116,7 @@ const BeforeOrder = () => {
       <table className='table table-bordered necessary-table'>
         <thead>
           <tr>
-            <th scope='col'></th>
+            <th scope='col' aria-label='blank' />
             <th
               className='bg-grey text-dark text-center necessary-th-dataonly'
               scope='col'
@@ -254,8 +256,8 @@ const BeforeOrder = () => {
           当社は、本サービスの提供にあたって、以下の各号に定める目的を遂行するために必要な範囲で、個人情報を利用します。
         </p>
         <ul className='list-style-none order-privacy-text privacy-list'>
-          {data.order.BeforeOrder.privacy.NO2List.map((listItem, index) => {
-            return <li key={index}>{listItem}</li>
+          {data.order.BeforeOrder.privacy.NO2List.map(listItem => {
+            return <li key={listItem}>{listItem}</li>
           })}
         </ul>
         <h3 className='h5 text-primary font-weight-bold'>
@@ -265,8 +267,8 @@ const BeforeOrder = () => {
           当社は、あらかじめご本人の同意を得ず、利用目的の達成に必要な範囲を超えて個人情報を取り扱うことはありません。合併その他の理由により個人情報を取得した場合にも、あらかじめご本人の同意を得ないで、承継前の利用目的の範囲を超えて取り扱うことはありません。ただし、以下の各号に定める場合はこの限りではありません。
         </p>
         <ul className='list-style-none order-privacy-text privacy-list'>
-          {data.order.BeforeOrder.privacy.NO3List.map((listItem, index) => {
-            return <li key={index}>{listItem}</li>
+          {data.order.BeforeOrder.privacy.NO3List.map(listItem => {
+            return <li key={listItem}>{listItem}</li>
           })}
         </ul>
         <h3 className='h5 text-primary font-weight-bold'>
@@ -282,8 +284,8 @@ const BeforeOrder = () => {
           当社は、個人情報を取得するにあたり、あらかじめその利用目的をご本人に通知し、又は公表します。ただし、以下の各号に定める場合はこの限りではありません。
         </p>
         <ul className='list-style-none order-privacy-text privacy-list'>
-          {data.order.BeforeOrder.privacy.NO5List.map((listItem, index) => {
-            return <li key={index}>{listItem}</li>
+          {data.order.BeforeOrder.privacy.NO5List.map(listItem => {
+            return <li key={listItem}>{listItem}</li>
           })}
         </ul>
         <h3 className='h5 text-primary font-weight-bold'>
@@ -312,22 +314,22 @@ const BeforeOrder = () => {
           10.第三者提供の制限
         </h3>
         <ul className='list-style-none order-privacy-text privacy-list-num'>
-          {data.order.BeforeOrder.privacy.NO10List.map((listItem, index) => {
+          {data.order.BeforeOrder.privacy.NO10List.map(listItem => {
             return (
-              <li key={index}>
+              <li key={listItem.text}>
                 {listItem.text}
                 {listItem.content.length > 0 && (
                   <ul className='list-style-none order-privacy-text privacy-list'>
-                    {listItem.content.map((item, index) => {
-                      return <li key={index}>{item}</li>
+                    {listItem.content.map(item => {
+                      return <li key={item}>{item}</li>
                     })}
                   </ul>
                 )}
                 {listItem.extra.length > 0 && (
                   <ul className='list-style-none order-privacy-text'>
-                    {listItem.extra.map((item, index) => {
+                    {listItem.extra.map(item => {
                       return (
-                        <li className='privacy-list-item-point' key={index}>
+                        <li className='privacy-list-item-point' key={item}>
                           {item}
                         </li>
                       )
@@ -343,8 +345,8 @@ const BeforeOrder = () => {
           当社は、ご本人から、個人情報開示の依頼があった場合には、ご依頼主がご本人であることを確認した上で遅滞なく開示します。ただし、開示することにより以下の各号のいずれかに該当する場合は、その全部又は一部を開示しないこともあり、開示しない決定をした場合には、その旨を遅滞なく通知します。
         </p>
         <ul className='list-style-none order-privacy-text privacy-list'>
-          {data.order.BeforeOrder.privacy.NO11List.map((listItem, index) => {
-            return <li key={index}>{listItem}</li>
+          {data.order.BeforeOrder.privacy.NO11List.map(listItem => {
+            return <li key={listItem}>{listItem}</li>
           })}
         </ul>
         <h3 className='h5 text-primary font-weight-bold'>
@@ -370,8 +372,8 @@ const BeforeOrder = () => {
           当社は、以下の場合について何らの責任を負いません。
         </p>
         <ul className='list-style-none order-privacy-text privacy-list'>
-          {data.order.BeforeOrder.privacy.NO15List.map((listItem, index) => {
-            return <li key={index}>{listItem}</li>
+          {data.order.BeforeOrder.privacy.NO15List.map(listItem => {
+            return <li key={listItem}>{listItem}</li>
           })}
         </ul>
         <h3 className='h5 text-primary font-weight-bold'>16.問い合わせ窓口</h3>
@@ -381,10 +383,10 @@ const BeforeOrder = () => {
         <div className='order-privacy-text'>
           <div>LinksMate お客さまセンター</div>
           <div>ウェブからのお問い合わせ：</div>
-          <Link to='#'>https://linksmate.jp/support</Link>
+          <Link to='/#'>https://linksmate.jp/support</Link>
         </div>
         <div className='order-privacy-text'>
-          <div>電話でのお問い合わせ（受付時間　午前9時～午後6時）</div>
+          <div>電話でのお問い合わせ（受付時間 午前9時～午後6時）</div>
           <div>一般電話（携帯電話を含む）からのお問い合わせ：</div>
           <div>0120-404-513</div>
         </div>
@@ -408,7 +410,7 @@ const BeforeOrder = () => {
       <div className='necessary-list'>
         <div className='necessary-list-star'>
           ※1 使用できる各公的書類については
-          <Link to='#'>
+          <Link to='/#'>
             こちら
             <img src={popup} alt='' />
           </Link>
@@ -419,7 +421,7 @@ const BeforeOrder = () => {
         </div>
         <div>
           MNP予約番号発行手続き詳細などは
-          <Link to='#'>
+          <Link to='/#'>
             こちら
             <img src={popup} alt='' />
           </Link>

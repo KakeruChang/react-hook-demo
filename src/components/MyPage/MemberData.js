@@ -1,10 +1,12 @@
 import React from 'react'
 // import React, { useState, useCallback } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 import MUDoubleCircleProgress from './MUDoubleCircleProgress'
 
 const MemberData = props => {
+  const { data } = props
   // const [wrapperSize, setWrapperSize] = useState({ height: 0, width: 0 })
 
   // const measuredRef = useCallback(
@@ -31,18 +33,18 @@ const MemberData = props => {
             wrapper={wrapperSize}
           /> */}
         <MUDoubleCircleProgress
-          dataThisMonth={props.data.thisMonth}
-          dataBefore={props.data.before}
+          dataThisMonth={data.thisMonth}
+          dataBefore={data.before}
         />
         <div className='row mx-0 my-3 justify-content-center'>
-          <span className='bg-primary col-1'></span>
+          <span className='bg-primary col-1' />
           <span className='col-6'>当月のデータ通信残量</span>
-          <span className='col-3'>{1024 * props.data.thisMonth.now}MB</span>
+          <span className='col-3'>{1024 * data.thisMonth.now}MB</span>
         </div>
         <div className='row mx-0 my-3 justify-content-center'>
-          <span className='bg-warning col-1'></span>
+          <span className='bg-warning col-1' />
           <span className='col-6'>繰り越しデータ通信残量</span>
-          <span className='col-3'>{1024 * props.data.before.now}MB</span>
+          <span className='col-3'>{1024 * data.before.now}MB</span>
         </div>
       </div>
       <div className='col-md-6 col-12'>
@@ -76,6 +78,10 @@ const MemberData = props => {
       </div>
     </div>
   )
+}
+
+MemberData.propTypes = {
+  data: PropTypes.objectOf(PropTypes.any).isRequired
 }
 
 export default MemberData

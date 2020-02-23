@@ -48,20 +48,19 @@ export const findUser = email => {
 
   return query
     .get()
-    .then(function(querySnapshot) {
+    .then(querySnapshot => {
       if (querySnapshot.docs.length > 0) {
-        let result = []
-        querySnapshot.forEach(function(doc) {
+        const result = []
+        querySnapshot.forEach(doc => {
           // doc.data() is never undefined for query doc snapshots
           // console.log(doc.id, ' => ', doc.data())
           result.push(doc.data())
         })
         return result
-      } else {
-        return []
       }
+      return []
     })
-    .catch(function(error) {
+    .catch(error => {
       return error
     })
 }

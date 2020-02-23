@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { fireauth } from '../api/firebase'
 
 import '../scss/login.scss'
 
 const Login = props => {
+  const { location, history, auth } = props
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [logInError, setLogInError] = useState('')
-  const { from } = props.location.state || { from: { pathname: '/mypage' } }
+  const { from } = location.state || { from: { pathname: '/mypage' } }
 
   const onChangeHandler = event => {
     switch (event.target.id) {
@@ -27,11 +29,8 @@ const Login = props => {
     event.preventDefault()
     fireauth
       .signInWithEmailAndPassword(email, password)
-      .then(result => {
-        console.log(result)
-      })
-      .catch(error => {
-        console.log(error)
+      .then()
+      .catch(() => {
         setLogInError('ログインIDまたはパスワードが違います')
         setEmail('')
         setPassword('')
@@ -42,11 +41,11 @@ const Login = props => {
   }
 
   useEffect(() => {
-    if (props.auth) {
-      props.history.push(from.pathname)
+    if (auth) {
+      history.push(from.pathname)
     }
     // eslint-disable-next-line
-  }, [props.auth])
+  }, [auth])
 
   return (
     <div className='container'>
@@ -61,12 +60,7 @@ const Login = props => {
           <div className='row login-form-wrap'>
             <div className='col-md-9 col-12 row pr-0'>
               <div className='form-group col-12 row pr-0'>
-                <label
-                  htmlFor='inputEmail3'
-                  className='col-md-3 col-12 col-form-label'
-                >
-                  ログインID
-                </label>
+                <div className='col-md-3 col-12 col-form-label'>ログインID</div>
                 <div className='col-md-9 col-12 pr-0'>
                   <input
                     type='email'
@@ -78,12 +72,7 @@ const Login = props => {
                 </div>
               </div>
               <div className='form-group col-12 row pr-0'>
-                <label
-                  htmlFor='inputPassword3'
-                  className='col-md-3 col-12 col-form-label'
-                >
-                  パスワード
-                </label>
+                <div className='col-md-3 col-12 col-form-label'>パスワード</div>
                 <div className='col-md-9 col-12 pr-0'>
                   <input
                     type='password'
@@ -99,7 +88,9 @@ const Login = props => {
               <div className='form-group col-12 row pr-0'>
                 <div className='col-12 pr-0'>
                   <button
-                    onClick={event => login(event)}
+                    onClick={event => {
+                      return login(event)
+                    }}
                     type='submit'
                     className='btn btn-primary h-100 w-100'
                   >
@@ -126,6 +117,15 @@ const Login = props => {
       </div>
     </div>
   )
+}
+
+Login.propTypes = {
+  history: PropTypes.objectOf(PropTypes.any).isRequired,
+  location: PropTypes.objectOf(PropTypes.any).isRequired,
+  auth: PropTypes.objectOf(PropTypes.any)
+}
+Login.defaultProps = {
+  auth: null
 }
 
 export default Login

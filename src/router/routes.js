@@ -53,7 +53,9 @@ const routes = [
       {
         path: '*',
         exact: true,
-        component: () => <Redirect to='/' />
+        component: () => {
+          return <Redirect to='/' />
+        }
       }
     ]
   },
@@ -70,7 +72,9 @@ const routes = [
   {
     path: '*',
     exact: true,
-    component: () => <Redirect to='/' />
+    component: () => {
+      return <Redirect to='/' />
+    }
   }
 ]
 

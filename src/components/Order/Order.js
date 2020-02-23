@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import { renderRoutes } from 'react-router-config'
 import { Link } from 'react-router-dom'
 
@@ -7,6 +8,7 @@ import logo from '../../assets/icon_logo.png'
 import '../../scss/order.scss'
 
 const Order = props => {
+  const { location, route } = props
   const [plan, setPlan] = useState({
     sim: { text: '-', value: 0 },
     data: { value: 0, data: '-', game: '-', star: '-' }
@@ -42,8 +44,8 @@ const Order = props => {
         </Link>
       </nav>
       <div className='container-order'>
-        <OrderTitle path={props.location.pathname} />
-        {renderRoutes(props.route.routes, {
+        <OrderTitle path={location.pathname} />
+        {renderRoutes(route.routes, {
           apply,
           setApply,
           plan,
@@ -54,6 +56,11 @@ const Order = props => {
       </div>
     </>
   )
+}
+
+Order.propTypes = {
+  location: PropTypes.objectOf(PropTypes.any).isRequired,
+  route: PropTypes.objectOf(PropTypes.any).isRequired
 }
 
 export default Order

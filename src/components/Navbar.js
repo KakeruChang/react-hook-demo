@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSignal, faUser, faDoorOpen } from '@fortawesome/free-solid-svg-icons'
@@ -11,7 +12,7 @@ import logoTest from '../assets/hdr_btn_order2.png'
 import '../scss/Navbar.scss'
 import TopMenu from './TopMenu'
 import constants from '../data/constants'
-import { useWindowSize } from '../hooks/useWindowSize'
+import useWindowSize from '../hooks/useWindowSize'
 
 const Navbar = props => {
   const [isActive, setActive] = useState(constants.navBar[0])
@@ -21,10 +22,8 @@ const Navbar = props => {
   const logout = () => {
     fireauth
       .signOut()
-      .then(() => {
-        console.log('log out success')
-      })
-      .catch(error => console.log(error))
+      .then(() => {})
+      .catch(() => {})
   }
   const logoutButton = () => {
     if (isLoggined) {
@@ -43,6 +42,7 @@ const Navbar = props => {
         </li>
       )
     }
+    return false
   }
   const activateNav = () => {
     switch (props.path) {
@@ -78,7 +78,7 @@ const Navbar = props => {
           aria-expanded='false'
           aria-label='Toggle navigation'
         >
-          <span className='navbar-toggler-icon'></span>
+          <span className='navbar-toggler-icon' />
         </button>
         <div className='collapse navbar-collapse' id='navbarSupportedContent'>
           <ul className='navbar-nav mr-auto row m-0'>
@@ -90,7 +90,9 @@ const Navbar = props => {
               <Link
                 to='/'
                 className='nav-link'
-                onClick={() => setActive(constants.navBar[0])}
+                onClick={() => {
+                  return setActive(constants.navBar[0])
+                }}
               >
                 <FontAwesomeIcon icon={faSignal} size='1x' />
                 <span
@@ -138,6 +140,10 @@ const Navbar = props => {
       </div>
     </nav>
   )
+}
+
+Navbar.propTypes = {
+  path: PropTypes.string.isRequired
 }
 
 export default Navbar

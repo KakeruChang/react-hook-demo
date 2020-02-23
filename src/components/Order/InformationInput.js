@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import classNames from 'classnames'
 
-import { useWindowSize } from '../../hooks/useWindowSize'
+import useWindowSize from '../../hooks/useWindowSize'
 import { findUser } from '../../api/firebase'
 import NecessaryInput from '../common/NecessaryInput'
 
@@ -13,7 +14,7 @@ const InformationInput = props => {
   const windowSize = useWindowSize()
 
   const checkEmpty = () => {
-    let checkResult = []
+    const checkResult = []
     if (!apply.info.firstname) {
       checkResult.push('ご契約者名-苗字')
     }
@@ -54,7 +55,7 @@ const InformationInput = props => {
   }
 
   const onChangeHandler = event => {
-    const name = event.target.name
+    const { name } = event.target
     const originData = { ...apply.info }
     const applyCopy = { ...apply }
 
@@ -95,8 +96,7 @@ const InformationInput = props => {
         <form>
           {/* name */}
           <div className='form-group row'>
-            <label
-              htmlFor='inputFirstname'
+            <div
               className={classNames(
                 'col-md-3 col-12 col-form-label',
                 {
@@ -107,7 +107,7 @@ const InformationInput = props => {
               )}
             >
               ご契約者名
-            </label>
+            </div>
             <div
               className={classNames(
                 'col-md-3 col-6',
@@ -145,8 +145,7 @@ const InformationInput = props => {
           </div>
           {/* birthday */}
           <div className='form-group row'>
-            <label
-              htmlFor='inputFirstname'
+            <div
               className={classNames(
                 'col-md-3 col-12 col-form-label',
                 {
@@ -157,7 +156,7 @@ const InformationInput = props => {
               )}
             >
               生年月日
-            </label>
+            </div>
             <div
               className={classNames(
                 'col-md-3 col-4',
@@ -248,9 +247,7 @@ const InformationInput = props => {
                   onChange={onChangeHandler}
                   checked={apply.info.sex === '男'}
                 />
-                <label className='form-check-label' htmlFor='gridRadios1'>
-                  男
-                </label>
+                <span className='form-check-label'>男</span>
               </div>
               <div
                 className={classNames(
@@ -268,16 +265,13 @@ const InformationInput = props => {
                   onChange={onChangeHandler}
                   checked={apply.info.sex === '女'}
                 />
-                <label className='form-check-label' htmlFor='gridRadios2'>
-                  女
-                </label>
+                <span className='form-check-label'>女</span>
               </div>
             </div>
           </fieldset>
           {/* address */}
           <div className='form-group row'>
-            <label
-              htmlFor='inputAddress'
+            <div
               className={classNames(
                 'col-md-3 col-12 col-form-label',
                 {
@@ -288,7 +282,7 @@ const InformationInput = props => {
               )}
             >
               住所
-            </label>
+            </div>
             <div
               className={classNames(
                 'col-md-9 col-12',
@@ -309,8 +303,7 @@ const InformationInput = props => {
           </div>
           {/* phone */}
           <div className='form-group row'>
-            <label
-              htmlFor='inputPhone'
+            <div
               className={classNames(
                 'col-md-3 col-12 col-form-label',
                 {
@@ -322,7 +315,7 @@ const InformationInput = props => {
               )}
             >
               電話番号
-            </label>
+            </div>
             <div
               className={classNames(
                 'col-md-3 col-6',
@@ -356,8 +349,7 @@ const InformationInput = props => {
       >
         <form>
           <div className='form-group row'>
-            <label
-              htmlFor='inputEmail'
+            <div
               className={classNames(
                 'col-md-3 col-12 col-form-label',
                 {
@@ -369,7 +361,7 @@ const InformationInput = props => {
               )}
             >
               登録メールアドレス
-            </label>
+            </div>
             <div
               className={classNames(
                 'col-md-6 col-12',
@@ -395,8 +387,7 @@ const InformationInput = props => {
             </div>
           </div>
           <div className='form-group row'>
-            <label
-              htmlFor='inputPassword'
+            <div
               className={classNames(
                 'col-md-3 col-12 col-form-label',
                 {
@@ -408,7 +399,7 @@ const InformationInput = props => {
               )}
             >
               登録パスワード
-            </label>
+            </div>
             <div
               className={classNames(
                 'col-md-6 col-12',
@@ -457,6 +448,12 @@ const InformationInput = props => {
       </div>
     </div>
   )
+}
+
+InformationInput.propTypes = {
+  apply: PropTypes.objectOf(PropTypes.object).isRequired,
+  setApply: PropTypes.func.isRequired,
+  history: PropTypes.objectOf(PropTypes.any).isRequired
 }
 
 export default InformationInput

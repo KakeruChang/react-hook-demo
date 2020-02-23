@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import classNames from 'classnames'
-//import ChooseSimButton from './Simulation/ChooseSimButton'
 
-import { useWindowSize } from '../../hooks/useWindowSize'
+import useWindowSize from '../../hooks/useWindowSize'
 import kira from '../../assets/homePage/simulation/icon_kira.png'
 import calculator from '../../assets/homePage/simulation/icon_calculator.png'
 import hen from '../../assets/homePage/simulation/form-result-img02.png'
@@ -23,6 +22,32 @@ const Simulation = () => {
   const [price, setPrice] = useState(0)
   const windowSize = useWindowSize()
 
+  const constOptionPrice = inputPrice => {
+    let optionPrice = 0
+    const options = JSON.parse(JSON.stringify(inputPrice))
+
+    options.forEach(option => {
+      optionPrice += option.value
+    })
+    return optionPrice
+  }
+
+  const countPrice = renewArray => {
+    let result = 0
+    const countArray = [part1Active.value, part2Active.value, part3Active]
+    renewArray.forEach(renew => {
+      countArray[renew.index] = renew.value
+    })
+    countArray.forEach(count => {
+      if (typeof count === 'object' && count.length) {
+        result += constOptionPrice(count)
+      } else {
+        result += count
+      }
+    })
+    setPrice(result)
+  }
+
   const chooseSim = sim => {
     const part3Result = JSON.parse(JSON.stringify(part3Active))
 
@@ -35,7 +60,6 @@ const Simulation = () => {
         { text: [], value: 0 },
         { text: [], value: 0 }
       ]
-      console.log('sim1')
       setPart1Active({ text: '', value: 0 })
       setPart3Active(blankPart3)
       countPrice([
@@ -57,9 +81,8 @@ const Simulation = () => {
         part3Active[1].text.length !== 0 ||
         part3Active[2].text.length !== 0
       ) {
-        console.log('sim2')
         // reset 1st or 2nd or 3rd option
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 3; i += 1) {
           part3Result[i] = { text: [], value: 0 }
         }
       }
@@ -79,7 +102,6 @@ const Simulation = () => {
   }
 
   const chooseOption = (option, index) => {
-    console.log('chooseOption')
     const result = JSON.parse(JSON.stringify(part3Active))
 
     // check if this option is chosen
@@ -88,7 +110,6 @@ const Simulation = () => {
       option.text[0] === part3Active[index].text[0] &&
       option.text[1] === part3Active[index].text[1]
     ) {
-      console.log('check if this option is chosen')
       result[index] = { text: [], value: 0 }
       setPart3Active(result)
       countPrice([{ index: 2, value: result }])
@@ -97,7 +118,7 @@ const Simulation = () => {
 
     // limited option
     // get result
-    result[index] = Object.assign({}, option)
+    result[index] = { ...option }
     if (
       option.text[0] === data.homePage.simulation.option[0].text[0] ||
       option.text[0] === data.homePage.simulation.option[1].text[0] ||
@@ -125,63 +146,23 @@ const Simulation = () => {
     if (typeof array === 'object' && array.length) {
       let result = ''
       array.forEach(item => {
-        result = result + item
+        result += item
       })
       return result
     }
     return array
   }
-  // const testCheck = (a, b) => {
-  //   console.log(`test:a-${a}`)
-  //   console.log(`test:b-${b}`)
-  //   console.log(`test:ab-${a === b}`)
-  //   return a === b
-  // }
-
-  const constOptionPrice = price => {
-    let optionPrice = 0
-    let options = JSON.parse(JSON.stringify(price))
-
-    options.forEach(option => {
-      optionPrice = optionPrice + option.value
-    })
-    return optionPrice
-  }
-
-  // const countPrice = (index, value) => {
-  const countPrice = renewArray => {
-    console.log(renewArray)
-    // cancel choose plan
-    // if (!value) {
-    //   setPrice(0)
-    //   return
-    // }
-
-    let result = 0
-    let countArray = [part1Active.value, part2Active.value, part3Active]
-    // countArray[index] = value
-    renewArray.forEach(renew => {
-      countArray[renew.index] = renew.value
-    })
-    console.log(countArray)
-    countArray.forEach(price => {
-      if (typeof price === 'object' && price.length) {
-        result = result + constOptionPrice(price)
-        console.log(`if：${constOptionPrice(price)}`)
-      } else {
-        result = result + price
-      }
-      console.log(`result:${result}`)
-    })
-    setPrice(result)
-  }
 
   const simu1Button = (list, funcChoose, part, name, type) => {
     return list.map((choice, index) => {
       return (
-        <div className='col-lg-4 col-12 row justify-content-center' key={index}>
+        <div
+          className='col-lg-4 col-12 row justify-content-center'
+          key={choice.text}
+        >
           <div className='col-12  m-4'>
             <button
+              type='button'
               className={classNames('simu-area', {
                 'simu-area-checked': choice.text === arrayToString(part.text)
               })}
@@ -198,7 +179,7 @@ const Simulation = () => {
                 name={name}
                 id={`simu1${index}`}
                 value={choice.text}
-                onChange={event => {}}
+                onChange={() => {}}
                 checked={choice.text === arrayToString(part.text)}
               />
               <label
@@ -223,20 +204,19 @@ const Simulation = () => {
         defaultValue='default'
         onChange={choosePlan}
       >
-        {list.map((item, index) => {
+        {list.map(item => {
           if (item.value) {
             return (
-              <option value={item.value} key={index}>
-                {item.text}
-              </option>
-            )
-          } else {
-            return (
-              <option value='default' disabled key={index}>
+              <option value={item.value} key={item.text}>
                 {item.text}
               </option>
             )
           }
+          return (
+            <option value='default' disabled key={item.text}>
+              {item.text}
+            </option>
+          )
         })}
       </select>
     )
@@ -245,9 +225,13 @@ const Simulation = () => {
   const simu3Button = (list, funcChoose, part, name, type) => {
     return list.map((choice, index) => {
       return (
-        <div className='col-lg-4 col-12 row justify-content-center' key={index}>
+        <div
+          className='col-lg-4 col-12 row justify-content-center'
+          key={choice.text[0]}
+        >
           <div className='col-12  m-4'>
             <button
+              type='button'
               className={classNames(
                 'simu-area',
                 { 'px-3': windowSize.width >= 576 },
@@ -268,15 +252,15 @@ const Simulation = () => {
                 name={name}
                 id={`simu3${index}`}
                 value={choice.text}
-                onChange={event => {}}
+                onChange={() => {}}
                 checked={
                   arrayToString(choice.text) === arrayToString(part[index].text)
                 }
               />
 
               <label htmlFor={`simu3${index}`}>
-                {choice.text.map((item, index) => {
-                  return <div key={index}>{item}</div>
+                {choice.text.map(item => {
+                  return <div key={item}>{item}</div>
                 })}
               </label>
             </button>
@@ -285,6 +269,7 @@ const Simulation = () => {
       )
     })
   }
+
   return (
     <div className='bg-primary p-4'>
       <div className='container'>
@@ -388,7 +373,7 @@ const Simulation = () => {
               </div>
               <div>※価格表示はすべて「税抜き」です。</div>
               <div>
-                <Link to='#' className='text-decoration-none text-primary'>
+                <Link to='/#' className='text-decoration-none text-primary'>
                   詳しい料金はこちら
                 </Link>
               </div>

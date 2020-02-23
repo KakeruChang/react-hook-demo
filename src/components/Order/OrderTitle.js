@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 import data from '../../data/data'
 import constants from '../../data/constants'
-import { useWindowSize } from '../../hooks/useWindowSize'
+import useWindowSize from '../../hooks/useWindowSize'
 // import '../../scss/order.scss'
 
 const OrderTitle = props => {
+  const { path } = props
   const windowSize = useWindowSize()
   const breakPoint = constants.order.titleBreakPoint
   const adjustFor320PX = 768
-  const title = data.order.title
+  const { title } = data.order
   const [orderActive, setOrderActive] = useState(title[0].name)
 
-  const changeActive = path => {
-    switch (path) {
+  const changeActive = pathActive => {
+    switch (pathActive) {
       case '/order':
         setOrderActive('BeforeOrder')
         break
@@ -36,14 +38,14 @@ const OrderTitle = props => {
   }
 
   useEffect(() => {
-    changeActive(props.path)
-  }, [props.path])
+    changeActive(path)
+  }, [path])
 
   return (
     <div className='container'>
       <div className='row justify-content-between mt-5'>
         <div className='border-right-empty'>
-          <span></span>
+          <span />
         </div>
         {title.map(item => {
           return (
@@ -76,7 +78,7 @@ const OrderTitle = props => {
               >
                 {item.index !== 1 && (
                   <span className='order-before order-arrow'>
-                    <span className='inactive'></span>
+                    <span className='inactive' />
                   </span>
                 )}
                 <span className='order-item-index'>{item.index}</span>
@@ -94,7 +96,7 @@ const OrderTitle = props => {
                         { active: item.name === orderActive },
                         { inactive: item.name !== orderActive }
                       )}
-                    ></span>
+                    />
                   </span>
                 )}
               </div>
@@ -104,6 +106,10 @@ const OrderTitle = props => {
       </div>
     </div>
   )
+}
+
+OrderTitle.propTypes = {
+  path: PropTypes.string.isRequired
 }
 
 export default OrderTitle

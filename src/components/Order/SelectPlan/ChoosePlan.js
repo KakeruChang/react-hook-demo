@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 import data from '../../../data/data'
-import { useWindowSize } from '../../../hooks/useWindowSize'
+import useWindowSize from '../../../hooks/useWindowSize'
 
 const ChoosePlan = props => {
+  const { plan } = props
   const windowSize = useWindowSize()
   const [simActive, setSimActive] = useState({ text: '-', value: 0 })
   const [dataActive, setDataActive] = useState({
@@ -13,21 +15,6 @@ const ChoosePlan = props => {
     game: '-',
     star: '-'
   })
-
-  useEffect(() => {
-    if (!props.plan.sim.value) {
-      setSimActive({ text: '-', value: 0 })
-      return
-    }
-    setSimActive(props.plan.sim)
-  }, [props.plan.sim])
-  useEffect(() => {
-    if (!props.plan.data.value) {
-      setDataActive({ value: 0, data: '-', game: '-', star: '-' })
-      return
-    }
-    setDataActive(props.plan.data)
-  }, [props.plan.data])
 
   const chooseSim = sim => {
     setSimActive({ text: sim.text, value: sim.value })
@@ -40,6 +27,16 @@ const ChoosePlan = props => {
         star: props.plan.data.star
       }
     })
+  }
+  const countData = price => {
+    switch (price) {
+      case 970:
+        return [10, 1, 0]
+      case 1020:
+        return [20, 3, 1]
+      default:
+        return ['-', '-', '-']
+    }
   }
   const choosePlan = event => {
     const planPrice = parseInt(event.target.value, 10)
@@ -61,26 +58,17 @@ const ChoosePlan = props => {
       }
     })
   }
-  const countData = price => {
-    switch (price) {
-      case 970:
-        return [10, 1, 0]
-      case 1020:
-        return [20, 3, 1]
-      default:
-        return ['-', '-', '-']
-    }
-  }
 
   const simButton = (list, active) => {
     return list.map((choice, index) => {
       return (
         <div
           className='col-lg-4 col-12 row justify-content-center m-0 p-0'
-          key={index}
+          key={choice.text}
         >
           <div className='col-12  m-4'>
             <button
+              type='button'
               className={classNames('simu-area', {
                 'simu-area-checked': choice.text === active.text
               })}
@@ -97,7 +85,7 @@ const ChoosePlan = props => {
                 name='first-part'
                 id={`simu1${index}`}
                 value={choice.text}
-                onChange={event => {}}
+                onChange={() => {}}
                 checked={choice.text === active.text}
               />
               <label
@@ -119,23 +107,22 @@ const ChoosePlan = props => {
     return (
       <select
         className='form-control'
-        defaultValue={props.plan.data.value || 'default'}
+        defaultValue={plan.data.value || 'default'}
         onChange={choosePlan}
       >
-        {list.map((item, index) => {
+        {list.map(item => {
           if (item.value) {
             return (
-              <option value={item.value} key={index}>
-                {item.text}
-              </option>
-            )
-          } else {
-            return (
-              <option value='default' disabled key={index}>
+              <option value={item.value} key={item.text}>
                 {item.text}
               </option>
             )
           }
+          return (
+            <option value='default' disabled key={item.text}>
+              {item.text}
+            </option>
+          )
         })}
       </select>
     )
@@ -204,6 +191,22 @@ const ChoosePlan = props => {
     )
   }
 
+  useEffect(() => {
+    if (!plan.sim.value) {
+      setSimActive({ text: '-', value: 0 })
+      return
+    }
+    setSimActive(plan.sim)
+  }, [plan.sim])
+
+  useEffect(() => {
+    if (!plan.data.value) {
+      setDataActive({ value: 0, data: '-', game: '-', star: '-' })
+      return
+    }
+    setDataActive(plan.data)
+  }, [plan.data])
+
   return (
     <div className='container'>
       <div className='lm-title border-primary'>利用する機能を選ぶ</div>
@@ -216,6 +219,11 @@ const ChoosePlan = props => {
       <div className='m-3'>{planTable()}</div>
     </div>
   )
+}
+
+ChoosePlan.propTypes = {
+  plan: PropTypes.objectOf(PropTypes.object).isRequired,
+  setPlan: PropTypes.func.isRequired
 }
 
 export default ChoosePlan

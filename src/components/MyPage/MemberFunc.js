@@ -4,14 +4,17 @@ import MemberData from './MemberData'
 import MemberPhone from './MemberPhone'
 import MemberGame from './MemberGame'
 import MemberLP from './MemberLP'
-// import data from '../../data/data'
 import { HooksContext, UPDATE_POST } from '../../hooks/HookContext'
 import { findUser } from '../../api/firebase'
 
 const MemberFunc = () => {
   const { dispatch, data, user } = useContext(HooksContext)
-  console.log(useContext(HooksContext))
-  // const user = data.user
+
+  const checkExist = async () => {
+    const result = await findUser(user.email)
+
+    dispatch({ type: UPDATE_POST, user: result[0].user })
+  }
 
   useEffect(() => {
     if (user) {
@@ -19,14 +22,8 @@ const MemberFunc = () => {
         checkExist()
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line
   }, [user])
-
-  const checkExist = async () => {
-    const result = await findUser(user.email)
-
-    dispatch({ type: UPDATE_POST, user: result[0].user })
-  }
 
   return (
     <>

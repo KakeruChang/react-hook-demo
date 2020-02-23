@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { fireauth } from '../api/firebase'
 
-export const useIsLoggedIn = (initialValue = {}) => {
+const useIsLoggedIn = (initialValue = {}) => {
   const [isLoggedIn, setIsLoggedIn] = useState(initialValue)
 
   useEffect(() => {
@@ -16,3 +16,4 @@ export const useIsLoggedIn = (initialValue = {}) => {
 
   return isLoggedIn
 }
+export default useIsLoggedIn
