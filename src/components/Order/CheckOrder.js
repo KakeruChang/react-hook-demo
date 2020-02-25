@@ -85,10 +85,10 @@ const CheckOrder = props => {
     return user
   }
 
-  const checkApply = () => {
-    signup(apply.info.email, apply.info.password)
-    addData(apply.info, { data: apply.order, user: makeFakeData() })
-    setApply({
+  const checkApply = async () => {
+    await signup(apply.info.email, apply.info.password)
+    await addData(apply.info, { data: apply.order, user: makeFakeData() })
+    await setApply({
       order: {},
       info: {
         firstname: '',
