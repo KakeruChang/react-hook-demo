@@ -22,15 +22,12 @@ export const fireauth = firebase.auth()
 export const firestore = firebase.firestore()
 
 export const signup = (email, password) => {
-  firebase
+  return firebase
     .auth()
     .createUserWithEmailAndPassword(email, password)
-    .then(() => {
-      console.log('sign up success')
-    })
+    .then()
     .catch(error => {
-      console.log('sign up success')
-      console.log(error)
+      return error
     })
 }
 
@@ -42,8 +39,8 @@ export const addData = (info, data) => {
       id: info.email,
       ...data
     })
-    .then(() => {})
-    .catch(() => {})
+    .then()
+    .catch()
 }
 
 export const findUser = email => {

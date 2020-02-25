@@ -10,6 +10,7 @@ import NecessaryInput from '../common/NecessaryInput'
 const InformationInput = props => {
   const { history, apply } = props
   const [accountIsExist, setAccountIsExist] = useState('')
+  const [pwdLessThanSix, setPwdLessThanSix] = useState(false)
   const [empty, setEmpty] = useState([])
   const windowSize = useWindowSize()
 
@@ -49,7 +50,7 @@ const InformationInput = props => {
   }
 
   const goToCheckOrder = () => {
-    if (empty.length === 0 && !accountIsExist) {
+    if (empty.length === 0 && !accountIsExist && !pwdLessThanSix) {
       history.push('/order/checkorder')
     }
   }
@@ -71,6 +72,16 @@ const InformationInput = props => {
       setAccountIsExist('もう使用されたメールアドレスです！')
     } else {
       setAccountIsExist('')
+    }
+  }
+
+  const checkPwdLength = () => {
+    const pwdLength = apply.info.password.length
+
+    if (pwdLength < 6) {
+      setPwdLessThanSix(true)
+    } else {
+      setPwdLessThanSix(false)
     }
   }
 
@@ -419,7 +430,13 @@ const InformationInput = props => {
                 name='password'
                 value={apply.info.password}
                 onChange={onChangeHandler}
+                onBlur={checkPwdLength}
               />
+              {pwdLessThanSix && (
+                <span className='text-danger font-weight-bolder'>
+                  パスワードは六文字以上にしてください
+                </span>
+              )}
             </div>
           </div>
         </form>

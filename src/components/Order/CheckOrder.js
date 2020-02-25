@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
@@ -7,6 +7,7 @@ import { signup, addData } from '../../api/firebase'
 
 const CheckOrder = props => {
   const { apply, plan, history } = props
+  const [errorMessage, setErrorMessage] = useState('')
 
   const makeFakeData = () => {
     const thisDay = moment()
@@ -86,9 +87,14 @@ const CheckOrder = props => {
   }
 
   const checkApply = async () => {
-    signup(apply.info.email, apply.info.password)
-    addData(apply.info, { data: apply.order, user: makeFakeData() })
-    history.push('/order/completeorder')
+    const error = await signup(apply.info.email, apply.info.password)
+
+    if (!error.message) {
+      addData(apply.info, { data: apply.order, user: makeFakeData() })
+      history.push('/order/completeorder')
+    } else {
+      setErrorMessage(error.message)
+    }
   }
 
   useEffect(() => {
@@ -176,6 +182,11 @@ const CheckOrder = props => {
             </tbody>
           </table>
         )}
+      </div>
+      <div className='container'>
+        <div className='row justify-content-center'>
+          <div className='font-weight-bolder text-danger'>{errorMessage}</div>
+        </div>
       </div>
       <div className='container'>
         <div className='row justify-content-center my-3'>
