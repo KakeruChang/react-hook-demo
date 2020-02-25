@@ -8,7 +8,7 @@ import App from './App'
 
 // ReactDOM.render(<App />, document.getElementById('root'));
 ReactDOM.render(
-  <BrowserRouter>
+  <BrowserRouter basename={process.env.PUBLIC_URL}>
     <App />
   </BrowserRouter>,
   document.getElementById('root')

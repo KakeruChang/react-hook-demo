@@ -31,7 +31,7 @@ const CompleteOrder = () => {
         </div>
       )}
       {width < 992 && (
-        <img src={data.order.complete.RWD} className='img-fluid my-3' alt='' />
+        <img src={data.order.complete.rwd} className='img-fluid my-3' alt='' />
       )}
       <div className='row justify-content-center my-3'>
         <div className='col-md-6 col-12'>

@@ -308,7 +308,7 @@ const data = {
     complete: {
       center: completeImgCenter,
       around: completeImgAround,
-      RWD: completeImgRWD
+      rwd: completeImgRWD
     }
   }
 }
