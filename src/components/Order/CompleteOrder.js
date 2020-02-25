@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import classNames from 'classnames'
 
@@ -7,6 +7,10 @@ import useWindowSize from '../../hooks/useWindowSize'
 
 const CompleteOrder = () => {
   const { width } = useWindowSize()
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   return (
     <div className='container'>

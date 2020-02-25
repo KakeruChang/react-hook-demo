@@ -25,13 +25,8 @@ export const signup = (email, password) => {
   firebase
     .auth()
     .createUserWithEmailAndPassword(email, password)
-    .then(() => {
-      console.log('signup success')
-    })
-    .catch(error => {
-      console.log('signup fail')
-      console.log(error)
-    })
+    .then()
+    .catch()
 }
 
 export const addData = (info, data) => {
@@ -42,13 +37,8 @@ export const addData = (info, data) => {
       id: info.email,
       ...data
     })
-    .then(() => {
-      console.log('add data success')
-    })
-    .catch(error => {
-      console.log('add data fail')
-      console.log(error)
-    })
+    .then()
+    .catch()
 }
 
 export const findUser = email => {

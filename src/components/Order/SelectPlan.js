@@ -30,6 +30,10 @@ const SelectPlan = props => {
   }
 
   useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
+  useEffect(() => {
     checkEmpty()
     // eslint-disable-next-line
   }, [plan])

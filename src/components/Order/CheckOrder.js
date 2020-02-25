@@ -113,6 +113,10 @@ const CheckOrder = props => {
     // eslint-disable-next-line
   }, [])
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   return (
     <>
       <div className='bg-dark'>
