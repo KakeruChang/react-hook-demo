@@ -6,7 +6,7 @@ import moment from 'moment'
 import { signup, addData } from '../../api/firebase'
 
 const CheckOrder = props => {
-  const { apply, plan, history, setApply } = props
+  const { apply, plan, history } = props
 
   const makeFakeData = () => {
     const thisDay = moment()
@@ -86,23 +86,8 @@ const CheckOrder = props => {
   }
 
   const checkApply = async () => {
-    await signup(apply.info.email, apply.info.password)
-    await addData(apply.info, { data: apply.order, user: makeFakeData() })
-    await setApply({
-      order: {},
-      info: {
-        firstname: '',
-        lastname: '',
-        birthYear: 0,
-        birthMonth: 0,
-        birthDay: 0,
-        sex: '',
-        address: '',
-        phone: '',
-        email: '',
-        password: ''
-      }
-    })
+    signup(apply.info.email, apply.info.password)
+    addData(apply.info, { data: apply.order, user: makeFakeData() })
     history.push('/order/completeorder')
   }
 
@@ -221,7 +206,6 @@ const CheckOrder = props => {
 
 CheckOrder.propTypes = {
   apply: PropTypes.objectOf(PropTypes.object).isRequired,
-  setApply: PropTypes.func.isRequired,
   history: PropTypes.objectOf(PropTypes.any).isRequired,
   plan: PropTypes.objectOf(PropTypes.object).isRequired
 }

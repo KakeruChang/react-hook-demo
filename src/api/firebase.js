@@ -25,8 +25,8 @@ export const signup = (email, password) => {
   firebase
     .auth()
     .createUserWithEmailAndPassword(email, password)
-    .then()
-    .catch()
+    .then(() => {})
+    .catch(() => {})
 }
 
 export const addData = (info, data) => {
@@ -37,8 +37,8 @@ export const addData = (info, data) => {
       id: info.email,
       ...data
     })
-    .then()
-    .catch()
+    .then(() => {})
+    .catch(() => {})
 }
 
 export const findUser = email => {
