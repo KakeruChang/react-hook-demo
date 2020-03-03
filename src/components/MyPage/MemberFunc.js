@@ -1,29 +1,49 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect } from 'react'
+// import React, { useEffect, useContext } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 
 import MemberData from './MemberData'
 import MemberPhone from './MemberPhone'
 import MemberGame from './MemberGame'
 import MemberLP from './MemberLP'
-import { HooksContext, UPDATE_POST } from '../../hooks/HookContext'
-import { findUser } from '../../api/firebase'
+// import { HooksContext, UPDATE_POST } from '../../hooks/HookContext'
+// import { findUser } from '../../api/firebase'
+import { fetchDataBegin } from '../../action/firebaseAction'
+import useIsLoggedIn from '../../hooks/useIsLoggedIn'
 
 const MemberFunc = () => {
-  const { dispatch, data, user } = useContext(HooksContext)
+  // const { dispatch, data, user } = useContext(HooksContext)
+  // const { dispatch, user } = useContext(HooksContext)
+  const isLoggedIn = useIsLoggedIn()
+  const dispatchRedux = useDispatch()
+  const data = useSelector(state => {
+    return state.data
+  })
 
-  const checkExist = async () => {
-    const result = await findUser(user.email)
+  // const checkExist = async () => {
+  //   const result = await findUser(user.email)
 
-    dispatch({ type: UPDATE_POST, user: result[0].user })
-  }
-
+  //   dispatch({ type: UPDATE_POST, user: result[0].user })
+  // }
+  // const checkExistRedux = () => {
+  //   dispatchRedux(updatePost(findUser(user.email)))
+  // }
   useEffect(() => {
-    if (user) {
-      if (user.email) {
-        checkExist()
+    if (isLoggedIn) {
+      if (isLoggedIn.email) {
+        dispatchRedux(fetchDataBegin(isLoggedIn.email))
       }
     }
     // eslint-disable-next-line
-  }, [user])
+  }, [isLoggedIn])
+  // useEffect(() => {
+  //   if (user) {
+  //     if (user.email) {
+  //       checkExist()
+  //     }
+  //   }
+  //   // eslint-disable-next-line
+  // }, [user])
 
   return (
     <>

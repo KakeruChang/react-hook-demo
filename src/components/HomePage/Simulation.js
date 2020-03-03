@@ -48,9 +48,7 @@ const Simulation = () => {
     setPrice(result)
   }
 
-  const chooseSim = sim => {
-    const part3Result = JSON.parse(JSON.stringify(part3Active))
-
+  const checkChosenSim = sim => {
     // check if this sim is chosen
     if (part1Active.text !== '' && sim.text === part1Active.text) {
       const blankPart3 = [
@@ -66,8 +64,28 @@ const Simulation = () => {
         { index: 0, value: 0 },
         { index: 2, value: blankPart3 }
       ])
-      return
     }
+  }
+
+  const chooseSim = sim => {
+    const part3Result = JSON.parse(JSON.stringify(part3Active))
+    // check if this sim is chosen
+    // if (part1Active.text !== '' && sim.text === part1Active.text) {
+    //   const blankPart3 = [
+    //     { text: [], value: 0 },
+    //     { text: [], value: 0 },
+    //     { text: [], value: 0 },
+    //     { text: [], value: 0 },
+    //     { text: [], value: 0 }
+    //   ]
+    //   setPart1Active({ text: '', value: 0 })
+    //   setPart3Active(blankPart3)
+    //   countPrice([
+    //     { index: 0, value: 0 },
+    //     { index: 2, value: blankPart3 }
+    //   ])
+    //   return
+    // }
 
     // limited Sim
     // choose 2nd or 3rd plan
@@ -153,15 +171,89 @@ const Simulation = () => {
     return array
   }
 
-  const simu1Button = (list, funcChoose, part, name, type) => {
+  const chooseInput = (type, name, value, index, part, funcChoose) => {
+    return (
+      <label
+        className={classNames('simu-area', {
+          'simu-area-checked': value.text === arrayToString(part.text)
+        })}
+        htmlFor={`${name}${index}`}
+      >
+        <input
+          className={classNames({
+            'mr-5': windowSize.width > 576
+          })}
+          type={type}
+          name={name}
+          id={`${name}${index}`}
+          value={value.text}
+          onChange={() => {
+            funcChoose(value)
+          }}
+          onClick={() => {
+            return checkChosenSim(value)
+          }}
+          checked={value.text === arrayToString(part.text)}
+        />
+        {value.text}
+      </label>
+    )
+  }
+
+  const optionInput = (type, name, value, index, part, funcChoose) => {
+    return (
+      <label
+        type='button'
+        className={classNames(
+          'simu-area',
+          { 'px-3': windowSize.width >= 576 },
+          {
+            'simu-area-checked':
+              arrayToString(value.text) === arrayToString(part[index].text)
+          }
+        )}
+        htmlFor={`${name}${index}`}
+      >
+        <input
+          className='mb-2 mr-2'
+          type={type}
+          name={name}
+          id={`${name}${index}`}
+          value={value.text}
+          onChange={() => {
+            funcChoose(value, index)
+          }}
+          checked={
+            arrayToString(value.text) === arrayToString(part[index].text)
+          }
+        />
+        <div className='text-center'>
+          {value.text.map(item => {
+            return <div key={item}>{item}</div>
+          })}
+        </div>
+      </label>
+    )
+  }
+
+  const simu1Button = (list, funcChoose, part, name, type, funcClick) => {
     return list.map((choice, index) => {
       return (
         <div
-          className='col-lg-4 col-12 row justify-content-center'
+          className='col-lg-4 col-12 row justify-content-center mx-0'
           key={choice.text}
         >
-          <div className='col-12  m-4'>
-            <button
+          <div className='col-12  my-4 p-0'>
+            {chooseInput(
+              type,
+              name,
+              choice,
+              index,
+              part,
+              funcChoose,
+              funcClick
+            )}
+            {/* <button
               type='button'
               className={classNames('simu-area', {
                 'simu-area-checked': choice.text === arrayToString(part.text)
@@ -179,7 +271,12 @@ const Simulation = () => {
                 name={name}
                 id={`simu1${index}`}
                 value={choice.text}
-                onChange={() => {}}
+                onChange={event => {
+                  return event.preventDefault()
+                }}
+                onClick={event => {
+                  return event.preventDefault()
+                }}
                 checked={choice.text === arrayToString(part.text)}
               />
               <label
@@ -190,7 +287,7 @@ const Simulation = () => {
               >
                 {choice.text}
               </label>
-            </button>
+            </button> */}
           </div>
         </div>
       )
@@ -226,11 +323,12 @@ const Simulation = () => {
     return list.map((choice, index) => {
       return (
         <div
-          className='col-lg-4 col-12 row justify-content-center'
+          className='col-lg-4 col-12 row justify-content-center mx-0'
           key={choice.text[0]}
         >
-          <div className='col-12  m-4'>
-            <button
+          <div className='col-12  my-4 p-0'>
+            {optionInput(type, name, choice, index, part, funcChoose)}
+            {/* <button
               type='button'
               className={classNames(
                 'simu-area',
@@ -263,7 +361,7 @@ const Simulation = () => {
                   return <div key={item}>{item}</div>
                 })}
               </label>
-            </button>
+            </button> */}
           </div>
         </div>
       )

@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
+// import React, { useState, useEffect, useContext } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -6,17 +7,19 @@ import { faSignal, faUser, faDoorOpen } from '@fortawesome/free-solid-svg-icons'
 import classNames from 'classnames'
 
 import { fireauth } from '../api/firebase'
-import { HooksContext } from '../hooks/HookContext'
+// import { HooksContext } from '../hooks/HookContext'
 import logo from '../assets/icon_logo.png'
 import logoTest from '../assets/hdr_btn_order2.png'
 import '../scss/Navbar.scss'
 import TopMenu from './TopMenu'
 import constants from '../data/constants'
 import useWindowSize from '../hooks/useWindowSize'
+import useIsLoggedIn from '../hooks/useIsLoggedIn'
 
 const Navbar = props => {
   const [isActive, setActive] = useState(constants.navBar[0])
-  const isLoggined = useContext(HooksContext).user
+  // const isLoggined = useContext(HooksContext).user
+  const isLoggined = useIsLoggedIn()
   const windowSize = useWindowSize()
 
   const logout = () => {

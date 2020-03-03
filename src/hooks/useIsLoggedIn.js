@@ -5,13 +5,21 @@ const useIsLoggedIn = (initialValue = {}) => {
   const [isLoggedIn, setIsLoggedIn] = useState(initialValue)
 
   useEffect(() => {
+    let isMounted = true
+
     fireauth.onAuthStateChanged(user => {
-      if (user) {
-        setIsLoggedIn(user)
-      } else {
-        setIsLoggedIn(null)
+      if (isMounted) {
+        if (user) {
+          setIsLoggedIn(user)
+        } else {
+          setIsLoggedIn(null)
+        }
       }
     })
+
+    return () => {
+      isMounted = false
+    }
   })
 
   return isLoggedIn

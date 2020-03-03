@@ -80,17 +80,14 @@ const ChooseExtraOption = props => {
           className='col-12 row justify-content-center mx-0'
           key={choice.text[0]}
         >
-          <div
+          <label
             className={classNames(
               'col-12 bg-white border border-primary rounded my-3',
               'extra-option',
               { 'px-3 py-4': windowSize.width >= 576 },
               { 'py-0 pr-0': windowSize.width < 576 }
             )}
-            onClick={event => {
-              event.preventDefault()
-              chooseOption(choice, index)
-            }}
+            htmlFor={`extraOption${index}`}
             aria-hidden='true'
           >
             <input
@@ -102,13 +99,14 @@ const ChooseExtraOption = props => {
               name='chooseExtraOption'
               id={`extraOption${index}`}
               value={choice.text}
-              onChange={() => {}}
+              onChange={() => {
+                chooseOption(choice, index)
+              }}
               checked={
                 arrayToString(choice.text) === arrayToString(part[index].text)
               }
             />
-            <label
-              htmlFor={`extraOption${index}`}
+            <div
               className={classNames(
                 'mb-0',
                 { h5: windowSize.width >= 576 },
@@ -123,7 +121,7 @@ const ChooseExtraOption = props => {
                 )
               })}
               {`+${choice.value}円/月額`}
-            </label>
+            </div>
             <div
               className={classNames(
                 'border-primary py-3 px-0 font-weight-bold row mx-0',
@@ -136,7 +134,7 @@ const ChooseExtraOption = props => {
                 <img src={popup} alt='' />
               </div>
             </div>
-          </div>
+          </label>
         </div>
       )
     })

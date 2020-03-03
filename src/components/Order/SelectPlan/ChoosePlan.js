@@ -67,15 +67,12 @@ const ChoosePlan = props => {
           key={choice.text}
         >
           <div className='col-12  m-4'>
-            <button
+            <label
               type='button'
               className={classNames('simu-area', {
                 'simu-area-checked': choice.text === active.text
               })}
-              onClick={event => {
-                event.preventDefault()
-                chooseSim(choice)
-              }}
+              htmlFor={`simu1${index}`}
             >
               <input
                 className={classNames('mb-2', {
@@ -85,19 +82,20 @@ const ChoosePlan = props => {
                 name='first-part'
                 id={`simu1${index}`}
                 value={choice.text}
-                onChange={() => {}}
+                onChange={() => {
+                  chooseSim(choice)
+                }}
                 checked={choice.text === active.text}
               />
-              <label
-                htmlFor={`simu1${index}`}
+              <div
                 className={classNames({
                   'font-14': windowSize.width > 991 && windowSize.width < 1200
                 })}
               >
                 {choice.text}
-              </label>
+              </div>
               {/* <img src={choice.img} className='chooseplan-sim-img' alt='' /> */}
-            </button>
+            </label>
           </div>
         </div>
       )
