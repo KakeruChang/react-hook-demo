@@ -29,6 +29,7 @@ module.exports = {
     'max-len': 'off',
     'no-confusing-arrow': 'off',
     'implicit-arrow-linebreak': 'off',
-    'react/jsx-props-no-spreading': 'off'
+    'react/jsx-props-no-spreading': 'off',
+    'function-paren-newline': 'off'
   }
 }
